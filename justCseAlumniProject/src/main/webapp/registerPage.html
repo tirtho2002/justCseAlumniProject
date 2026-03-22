@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    }
+
+    .register-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 450px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #4e54c8;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+      transition: border 0.3s;
+    }
+
+    input:focus, select:focus {
+      border: 1px solid #4e54c8;
+    }
+
+    .extra-fields {
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 1px solid #ddd;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 25px;
+      background-color: #4e54c8;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #3a3fa0;
+    }
+  </style>
+  <script>
+    function updateFormFields() {
+      const role = document.getElementById("role").value;
+      document.getElementById("alumniFields").style.display = (role === "alumni") ? "block" : "none";
+      document.getElementById("studentFields").style.display = (role === "student") ? "block" : "none";
+    }
+  </script>
+</head>
+<body>
+  <div class="register-container">
+    <h2>Register</h2>
+    <form action="RegisterServlet" method="post">
+      <label>Name:</label>
+      <input type="text" name="name" required>
+
+      <label>Email:</label>
+      <input type="email" name="email" required>
+
+      <label>Password:</label>
+      <input type="password" name="password" required>
+
+      <label>Batch NO:</label>
+      <input type="number" name="batch_no" min="1" max="17" required>
+
+      <label>Role:</label>
+      <select name="role" id="role" onchange="updateFormFields()" required>
+        <option value="">Select Role</option>
+        <option value="alumni">Alumni</option>
+        <option value="student">Student</option>
+      </select>
+
+      <!-- Alumni-->
+      <div id="alumniFields" class="extra-fields" style="display:none;">
+      
+        <label>Phone:</label>
+        <input type="text" name="alumni_phone">
+
+        <label>Location:</label>
+        <input type="text" name="alumni_location">
+
+        <label>Current Position:</label>
+        <input type="text" name="alumni_position">
+
+        <label>Company:</label>
+        <input type="text" name="alumni_company">
+
+        <label>Session:</label>
+        <input type="text" name="alumni_session">
+      </div>
+
+      <!-- Student -->
+      <div id="studentFields" class="extra-fields" style="display:none;">
+        <label>Roll No:</label>
+        <input type="text" name="student_roll">
+
+        <label>Reg No:</label>
+        <input type="text" name="student_reg">
+
+
+        <label>Session:</label>
+        <input type="text" name="student_session">
+
+        <label>Mobile No:</label>
+        <input type="text" name="student_mobile">
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+</body>
+</html>

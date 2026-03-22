@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="ironman.png">
+  <title>Alumni Portal Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #2980b9, #6dd5fa);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    nav button {
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;   
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+nav button:hover {
+  color: #ffda79;
+}
+
+    .login-box {
+      background: #fff;
+      padding: 80px;
+      border-radius: 10px;
+            align-items: center;
+      
+      box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+      width: 320px;
+    }
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+    }
+    .login-box input:focus {
+      border-color: #2980b9;
+    }
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 8px;
+      background: #2980b9;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s; 
+    }
+    .login-box button:hover {
+      background: #1b6391;
+    } 
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Alumni Portal Login</h2>
+    <form action="LoginServlet" method="POST">
+  
+ 
+
+  <input type="text" name="email" placeholder="Enter Email" required>
+  <input type="password" name="password" placeholder="Enter Password" required>
+  <input type="text" name="batch" placeholder="Enter CSE Batch No" required>
+
+ <select name="role" required style="width:108%; padding:12px; margin:10px 0; border:5px solid #ccc; border-radius:8px; font-size:14px;">
+      <option value="">Select Role</option>
+      <option value="student">Student</option>
+      <option value="alumni">Alumni</option>
+  </select>
+  <button type="submit">Login</button>
+</form>
+
+      
+      <center><a href="forgetPassPage.html"><br>Forget Password</a></center>
+            <center><a href="registerPage.html"><br>Register</a></center>
+       
+  </div>
+
+
+</body>
+</html>

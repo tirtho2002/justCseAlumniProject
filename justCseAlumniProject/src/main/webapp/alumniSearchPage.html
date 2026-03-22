@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Search Alumni</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			background: linear-gradient(135deg, #6a11cb, #2575fc);
+			color: white;
+		}
+
+		header {
+			background: rgba(255, 255, 255, 0.15);
+			backdrop-filter: blur(10px);
+			padding: 15px 40px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			color: white;
+		}
+		
+		    html, body {
+    height: 100%;
+    margin: 0;
+}
+		
+
+		header h1 {
+			margin: 0;
+			font-size: 22px;
+		}
+
+		nav {
+			display: flex;
+			gap: 20px;
+		}
+
+		nav a {
+			color: white;
+			text-decoration: none;
+			font-weight: bold;
+			transition: 0.3s;
+		}
+
+		nav a:hover {
+			color: #ffda79;
+		}
+
+		.container {
+			max-width: 700px;
+			margin: 60px auto;
+			background: white;
+			color: #333;
+			padding: 30px;
+			border-radius: 12px;
+			box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+		}
+
+		.container h2 {
+			text-align: center;
+			color: #6a11cb;
+			margin-bottom: 20px;
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			gap: 15px;
+		}
+
+		label {
+			font-weight: bold;
+			margin-bottom: 5px;
+		}
+
+		input[type="text"] {
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 6px;
+			font-size: 16px;
+			width: 100%;
+		}
+
+		select {
+			padding: 12px 15px;
+			border: 2px solid #6a11cb;
+			border-radius: 6px;
+			font-size: 16px;
+			background-color: white;
+			color: #333;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			appearance: none;
+			background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236a11cb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+			background-repeat: no-repeat;
+			background-position: right 10px center;
+			background-size: 20px;
+			padding-right: 40px;
+		}
+
+		select:hover {
+			border-color: #2575fc;
+			box-shadow: 0 0 8px rgba(37, 117, 252, 0.3);
+		}
+
+		select:focus {
+			outline: none;
+			border-color: #2575fc;
+			box-shadow: 0 0 12px rgba(37, 117, 252, 0.5);
+			background-color: #f9f9f9;
+		}
+
+		select option {
+			padding: 10px;
+			background-color: white;
+			color: #333;
+		}
+
+		select option:hover {
+			background: linear-gradient(#6a11cb, #6a11cb);
+			background-color: #6a11cb;
+			color: white;
+		}
+
+		button {
+			padding: 12px;
+			background: #6a11cb;
+			color: white;
+			border: none;
+			border-radius: 6px;
+			font-size: 16px;
+			font-weight: bold;
+			cursor: pointer;
+			transition: 0.3s;
+		}
+
+		button:hover {
+			background: #2575fc;
+		}
+	</style>
+</head>
+
+<body>
+
+	<header>
+		<h1>Alumni Portal</h1>
+		<nav>
+		
+			<a href="#">Companies</a>
+			
+		</nav>
+	</header>
+
+	<div class="container">
+		<h2>Search Alumni</h2>
+		<form action="SearchByBatchServlet" method="get">
+
+			<label for="batch">Search by Batch:</label>
+			<select name="batch" id="batch">
+				<option value="">Select Batch</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
+				 <option value="16">16</option>
+            <option value="17">17</option>
+			</select>
+
+			<button type="submit">Search</button>
+		</form>
+
+
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Forgot Password</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+			margin: 0;
+			background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+		}
+
+		.container {
+			background: #fff;
+			padding: 40px 30px;
+			border-radius: 12px;
+			box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+			width: 360px;
+			text-align: center;
+		}
+
+		.container h2 {
+			margin-bottom: 20px;
+			color: #333;
+			font-size: 22px;
+		}
+
+		.container input[type="email"] {
+			width: 100%;
+			padding: 12px;
+			margin: 12px 0;
+			border: 1px solid #ccc;
+			border-radius: 6px;
+			font-size: 15px;
+		}
+
+		.container button {
+			width: 100%;
+			padding: 12px;
+			background: #6a11cb;
+			border: none;
+			border-radius: 6px;
+			color: #fff;
+			font-size: 16px;
+			cursor: pointer;
+			transition: background 0.3s;
+		}
+
+		.container button:hover {
+			background: #2575fc;
+		}
+
+		.links {
+			margin-top: 15px;
+			font-size: 14px;
+		}
+
+		.links a {
+			text-decoration: none;
+			color: #6a11cb;
+			font-weight: bold;
+		}
+
+		.links a:hover {
+			text-decoration: underline;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h2>Forgot Password</h2>
+		<form action="forgetPasswordServlet" method="post">
+			<input type="email" name="email" placeholder="Enter your registered email" required>
+			<button type="submit">Send </button>
+		</form>
+
+	</div>
+</body>
+
+</html>

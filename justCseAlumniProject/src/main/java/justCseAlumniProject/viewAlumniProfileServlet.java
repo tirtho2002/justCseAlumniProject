@@ -22,7 +22,6 @@ public class viewAlumniProfileServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String idParam = request.getParameter("id");
 
-		System.out.println("It is the ID of that person which I clicked to see " + idParam);
 
 		if (idParam == null || idParam.isEmpty()) {
 			request.setAttribute("message", "No id parameter provided in the request.");

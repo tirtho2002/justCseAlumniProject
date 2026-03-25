@@ -311,15 +311,14 @@ for(Map<String,String> project : projects){
 
 <form action="sendMessageServlet" method="POST">
 
-<input type="hidden" name="receiverEmail"
-value="<%=request.getAttribute("email")%>">
+
 <input type="hidden" name="idOfUser"
 value="<%=request.getAttribute("idOfUser")%>">
 <input type="hidden" name="nameOfReceiver"
 value="<%=request.getAttribute("name")%>">
 
-<textarea name="message" rows="4"
-placeholder="Write your message here..."></textarea>
+<!-- <textarea name="message" rows="4"
+placeholder="Write your message here..."></textarea>-->
 
 <button class="send-btn" type="submit">
 Send Message
@@ -339,7 +338,7 @@ No profile data available. Please search for an alumni first.
 <a href="alumniSearchPage.html" class="back-link">
 ← Back to Search
 </a>
-
+        
 <% 
 }
 %>

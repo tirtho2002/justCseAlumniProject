@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,7 +28,7 @@ throws ServletException,IOException{
 		return;
 	}
 	
-	int sender_id=(Integer)(session.getAttribute("userId"));
+	int senderOrCurrentIdOfUser=(Integer)(session.getAttribute("userId"));
 	
 	
 	
@@ -35,32 +37,76 @@ throws ServletException,IOException{
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/alumniDirectory", "root",
 				"225500");
 		
-		String sql = "SELECT DISTINCT receiver_id,name FROM messages WHERE sender_id = ? or receiver_id = ?"; //sender_id or receiver_id diye query korar karone sender and receiver duijon er id asbe. tai DISTINCT use kore duplicate entry remove korechi.
+		String sql = "SELECT * FROM threads WHERE user1_id = ? or user2_id = ?"; //sender_id or receiver_id diye query korar karone sender and receiver duijon er id asbe. tai DISTINCT use kore duplicate entry remove korechi.
 		PreparedStatement ps = conn.prepareStatement(sql);
-		ps.setInt(1, sender_id);
-		ps.setInt(2, sender_id);
+		ps.setInt(1, senderOrCurrentIdOfUser);
+		ps.setInt(2, senderOrCurrentIdOfUser);
 		
 		ResultSet rs = ps.executeQuery();
 		
 		
-		HashMap<Integer,String> senderList=new HashMap<>();
+		
+		//1st Integer thred_id and 2nd Integer user যার সাথে connection করছে তার ID
+        List<MessageList> connectionList = new ArrayList<>();
 		
 		while(rs.next()) {
-			int receiverId=rs.getInt("receiver_id");
-			String name=rs.getString("name");
 			
-			senderList.put(receiverId, name);
-			System.out.println("Receiver ID: " + receiverId + ", Name: " + name); // Debugging line
+			if(rs.getInt("user1_id")==senderOrCurrentIdOfUser) {
+				int idOfReceiver=rs.getInt("user2_id");//id of receiver
+				
+				
+				
+				String sql2="SELECT name FROM user WHERE user_id=?";
+				PreparedStatement ps2=conn.prepareStatement(sql2);
+				ps2.setInt(1, idOfReceiver);
+				ResultSet rs2=ps2.executeQuery();
+				rs2.next();
+				
+				
+				String nameOfReceiver=rs2.getString("name");//name of receiver
+				int threadId=rs.getInt("thread_id");
+				
+				connectionList.add(new MessageList(threadId, senderOrCurrentIdOfUser, idOfReceiver, nameOfReceiver));
+				
+				
+				
+				
+			
+			}
+			else {
+
+			
+				int idOfReceiver=rs.getInt("user1_id");//id of receiver
+				
+				
+				
+				String sql2="SELECT name FROM user WHERE user_id=?";
+				PreparedStatement ps2=conn.prepareStatement(sql2);
+				ps2.setInt(1, idOfReceiver);
+				ResultSet rs2=ps2.executeQuery();
+				rs2.next();
+				
+				String nameOfReceiver=rs2.getString("name");//name of receiver
+				int threadId=rs.getInt("thread_id");
+				
+				connectionList.add(new MessageList(threadId, senderOrCurrentIdOfUser, idOfReceiver, nameOfReceiver));
+				
+				
+			}
+			
+			
 		}
 		
-		request.setAttribute("senderList", senderList);
-		request.getRequestDispatcher("messageSenderList.jsp").forward(request, response);
+		request.setAttribute("connectionList", connectionList);
+		request.getRequestDispatcher("connectionList.jsp").forward(request, response);
 		
 		
 		
 		
 	}
 	catch(Exception e) {
+		
+		System.out.println("Error in messageSenderListServlet: " + e.getMessage());
 		e.printStackTrace();
 	}
 	

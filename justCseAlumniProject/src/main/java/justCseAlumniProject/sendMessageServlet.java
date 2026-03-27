@@ -1,3 +1,7 @@
+//It used to collect or generate thread and then it will forward the the the thread_id currert_user_sender_id and receiver_id and receiver_name to the fetchMessageToTheProfileServlet for loading the messages of the sender and receiver in the profile page of the receiver.
+
+
+
 package justCseAlumniProject;
 
 import java.io.IOException;
@@ -29,6 +33,8 @@ public class sendMessageServlet extends HttpServlet {
 		int idOfReceiver = Integer.parseInt(request.getParameter("idOfUser"));
 		String nameOfReceiver = request.getParameter("nameOfReceiver");
 		int senderOrCurrentIdOfUser = (Integer) session.getAttribute("userId");
+		
+		
 		
 		System.out.println("sender: " + senderOrCurrentIdOfUser);
 		System.out.println("receiver: " + nameOfReceiver);
@@ -62,12 +68,14 @@ public class sendMessageServlet extends HttpServlet {
 		        if(rs.next()) {
 		        	int threadId=rs.getInt("thread_id");
 		        	
-		        	String sql2="select * from messages where thread_id=? order by send_at desc limit 10";
+		        	//used for sending the userid and name of the receiver to the messageloading servlet through request attribute. so that the messageloading servlet can load the messages of the receiver and sender.
 		        	
+		        	request.setAttribute("idOfReceiver", idOfReceiver);
+		    		request.setAttribute("nameOfReceiver", nameOfReceiver);
+		    		request.setAttribute("senderOrCurrentIdOfUser", senderOrCurrentIdOfUser);
+		    		request.setAttribute("threadId", threadId);
+		    		request.getRequestDispatcher("fetchMessageToTheProfileServlet").forward(request, response);
 		        	
-		        	PreparedStatement ps2=conn.prepareStatement(sql2);
-		        	ps2.setInt(1, threadId);
-		        	ResultSet rs2=ps2.executeQuery();
 		        	
 		        }
 		        else {
@@ -78,6 +86,18 @@ public class sendMessageServlet extends HttpServlet {
 		        ps3.setInt(1, user1);
 		        ps3.setInt(2, user2);
 		        ps3.executeUpdate();
+		        ResultSet rs3=ps3.getGeneratedKeys();
+		        rs3.next();
+		         int threadId=rs3.getInt(1);
+		         
+		         request.setAttribute("idOfReceiver", idOfReceiver);
+		 		request.setAttribute("nameOfReceiver", nameOfReceiver);
+		 		request.setAttribute("senderOrCurrentIdOfUser", senderOrCurrentIdOfUser);
+		 		request.setAttribute("threadId", threadId);
+		 		
+		 		request.getRequestDispatcher("fetchMessageToTheProfileServlet").forward(request, response);
+		 		
+		        
 		        }
 		        
 		    }

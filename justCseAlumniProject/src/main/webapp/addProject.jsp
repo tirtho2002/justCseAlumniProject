@@ -97,16 +97,16 @@
         <input type="text" name="title" required>
 
         <label>Description</label>
-        <textarea name="description"></textarea>
+        <textarea name="description " required></textarea>
 
         <label>Technologies Used</label>
-        <input type="text" name="technologies">
+        <input type="text" name="technologies" required>
 
         <label>Project Link</label>
-        <input type="text" name="project_link">
+        <input type="text" name="project_link"required>
 
         <label>GitHub Link</label>
-        <input type="text" name="github_link">
+        <input type="text" name="github_link"required>
 
         <button type="submit" class="btn">Add Project</button>
 

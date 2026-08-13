@@ -17,10 +17,22 @@
 }
 
 /* BASE */
-html, body {
-	height: 100%;
-	font-family: Arial, sans-serif;
-	background: linear-gradient(135deg, #6a11cb, #2575fc);
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+
+    display: flex;
+    flex-direction: column;
+
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 /* FLEX STRUCTURE */
@@ -79,7 +91,9 @@ nav button:hover {
 
 /* MAIN (IMPORTANT FOR FOOTER FIX) */
 main {
-	flex: 1;
+    flex: 1;
+    width: 100%;
+    background: transparent;
 }
 
 /* PROFILE CARD */
@@ -228,7 +242,7 @@ footer {
 			<button type="submit" class="ai-btn">Recommend SkillMates</button>
 		</form>
 
-		<a href="alumniSearchPage.html">Alumni</a>
+		<a href="alumniSearchPage.jsp">Alumni(kaj___baki)</a>
 <a href="messageSenderListServlet">Messages</a>
 
 
@@ -242,7 +256,6 @@ footer {
 	</nav>
 </header>
 
-<!-- MAIN WRAPPER -->
 <main>
 
 <div class="profile-container">

@@ -45,15 +45,20 @@ public class loginPageToDB extends HttpServlet {
 				session.setAttribute("batchNo", batch);
 				session.setAttribute("userId", rs.getInt("user_id"));
 				session.setAttribute("name", rs.getString("name"));
+				
+				
+				response.sendRedirect("loginToHomeServlet");
 
-				if ("alumni".equals(role)) {
+				
 
-					response.sendRedirect("alumniProfile");
-
-				} else {
-					response.sendRedirect("studentProfile");
-
-				}
+//				if ("alumni".equals(role)) {
+//
+//					response.sendRedirect("alumniProfile");
+//
+//				} else {
+//					response.sendRedirect("studentProfile");
+//
+//				}
 
 			} else {
 

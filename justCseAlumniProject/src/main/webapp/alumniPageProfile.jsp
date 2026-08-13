@@ -189,7 +189,7 @@ footer {
 <header>
 	<h1>Alumni Portal</h1>
 	<nav>
-		<a href="alumniSearchPage.html">Alumni</a>
+		<a href="alumniSearchPage.jsp">Alumni</a>
 	</nav>
 </header>
 

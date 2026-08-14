@@ -7,7 +7,9 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Alumni Portal - Home</title>
 
@@ -51,7 +53,8 @@
             width: 100%;
 
             background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(12px);
+
+            backdrop-filter: blur(120px);
             -webkit-backdrop-filter: blur(12px);
 
             border-bottom: 1px solid rgba(255,255,255,0.2);
@@ -116,6 +119,7 @@
 
         .page-container {
             max-width: 1200px;
+
             margin: 0 auto;
 
             display: grid;
@@ -345,6 +349,32 @@
         }
 
         .post-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* ================= POST JOB BUTTON ================= */
+
+        .job-post-btn {
+            border: none;
+
+            padding: 10px 20px;
+
+            border-radius: 20px;
+
+            background: #2575fc;
+
+            color: white;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .job-post-btn:hover {
+            background: #6a11cb;
+
             transform: scale(1.05);
         }
 
@@ -679,7 +709,8 @@
                 align-items: stretch;
             }
 
-            .post-btn {
+            .post-btn,
+            .job-post-btn {
                 width: 100%;
             }
         }
@@ -698,12 +729,13 @@
             Alumni Portal
         </div>
 
-
- 
         <nav>
-        
-      	<p><strong>Hello!! <%=request.getAttribute("name")%></p></strong>
-        
+
+            <p>
+                <strong>
+                    Hello!! <%=request.getAttribute("name")%>
+                </strong>
+            </p>
 
 <%--
             <a href="homepage.jsp" class="active">
@@ -725,10 +757,9 @@
             <a href="profile.jsp">
                 Profile
             </a>
-            --%>
+--%>
 
         </nav>
-
 
     </header>
 
@@ -767,24 +798,28 @@
 
                         </a>
 
-<a href="#"
-   class="side-menu-item"
-   onclick="document.getElementById('recommendForm').submit(); return false;">
 
-    <span>Recommended SkillMates</span>
+                        <a href="#"
+                           class="side-menu-item"
+                           onclick="document.getElementById('recommendForm').submit(); return false;">
 
-</a>
+                            <span>
+                                Recommended SkillMates
+                            </span>
 
-<form id="recommendForm"
-      action="recommendedAlumniServlet"
-      method="post"
-      style="display:none;">
+                        </a>
 
-    <input type="hidden"
-           name="batch"
-           value="<%=request.getAttribute("batchNo")%>">
 
-</form>
+                        <form id="recommendForm"
+                              action="recommendedAlumniServlet"
+                              method="post"
+                              style="display:none;">
+
+                            <input type="hidden"
+                                   name="batch"
+                                   value="<%=request.getAttribute("batchNo")%>">
+
+                        </form>
 
 
                         <a href="messageSenderListServlet"
@@ -796,31 +831,45 @@
 
                         </a>
 
+
 <%
     String role = (String) session.getAttribute("role");
 %>
 
-<a href="<%= "alumni".equalsIgnoreCase(role) ? "alumniProfile" : "studentProfile" %>"
-   class="side-menu-item">
 
-    <span>My Profile</span>
-
-</a>
-
-                        <div class="menu-divider"></div>
-
-
-                        <a href="settings.jsp"
+                        <a href="<%= "alumni".equalsIgnoreCase(role)
+                                ? "alumniProfile"
+                                : "studentProfile" %>"
                            class="side-menu-item">
 
                             <span>
-                                Settings
+                                My Profile
                             </span>
 
                         </a>
 
 
-                        <a href="logoutServlet"
+                        <div class="menu-divider"></div>
+
+
+  <%
+    if ("alumni".equalsIgnoreCase(role)) {
+%>
+
+ 
+                        <a href=""
+                           class="side-menu-item">
+
+                            <span>
+                                Post a Job
+                            </span>
+
+                        </a>
+                        
+      <%}%>
+      
+      
+                        <a href="loginPage.html"
                            class="side-menu-item logout">
 
                             <span>
@@ -828,6 +877,8 @@
                             </span>
 
                         </a>
+                        
+
 
                     </div>
 
@@ -846,42 +897,25 @@
                 <div class="glass-card create-post">
 
                     <h3>
-                        What's happening?
+                        What's on your mind?
                     </h3>
+
 
                     <form action="createPostServlet"
                           method="post">
 
+
                         <textarea
                             class="post-textarea"
                             name="content"
-                            placeholder="Share an update with the alumni community..."
+                            placeholder="What's on your mind? Share an update with the alumni community..."
                             required></textarea>
 
 
                         <div class="post-options">
 
-                            <select
-                                class="post-type"
-                                name="postType">
 
-                                <option value="UPDATE">
-                                    General Update
-                                </option>
-
-                                <option value="JOB">
-                                    Job Opportunity
-                                </option>
-
-                                <option value="ACHIEVEMENT">
-                                    Achievement
-                                </option>
-
-                                <option value="ANNOUNCEMENT">
-                                    Announcement
-                                </option>
-
-                            </select>
+                           
 
 
                             <button
@@ -891,6 +925,9 @@
                                 Post
 
                             </button>
+
+
+
 
                         </div>
 
@@ -916,8 +953,8 @@
                             </h4>
 
                             <span>
-                                JUST CSE  Batch 2019
-                                 2 hours ago
+                                JUST CSE Batch 2019
+                                2 hours ago
                             </span>
 
                         </div>
@@ -1011,7 +1048,6 @@
                                 <strong>Experience:</strong>
                                 Freshers / 0-2 years
                             </p>
-
 
                             <a href="#"
                                class="apply-btn">
@@ -1260,7 +1296,6 @@
 
                 </div>
 
-
             </aside>
 
 
@@ -1271,10 +1306,14 @@
 
     <!-- ================= FOOTER ================= -->
 
-</body>
+    <footer>
 
-<footer>
- 2026 All Rights Reserved by <strong>tirtho_saha</strong>
-</footer>
+        &copy; 2026 All Rights Reserved by
+        <strong>tirtho_saha</strong>
+
+    </footer>
+
+
+</body>
 
 </html>

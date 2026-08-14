@@ -238,11 +238,9 @@ footer {
 	<h1>Alumni Portal</h1>
 	<nav>
 
-		<form action="recommendedAlumniServlet" method="post" style="display:inline;">
-			<button type="submit" class="ai-btn">Recommend SkillMates</button>
-		</form>
+		
 
-		<a href="alumniSearchPage.jsp">Alumni(kaj___baki)</a>
+		<a href="alumniSearchPage.jsp"></a>
 <a href="messageSenderListServlet">Messages</a>
 
 
@@ -251,7 +249,7 @@ footer {
 			<button type="submit">Batch Mates</button>
 		</form>
 
-		<a href="alumniSearchByCompany.jsp">Companies</a>
+		<a href="alumniSearchByCompany.jsp"></a>
 
 	</nav>
 </header>

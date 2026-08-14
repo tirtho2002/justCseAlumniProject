@@ -204,7 +204,7 @@ footer {
 
 
 			<div class="full buttons">
-				<button type="submit" class="search">🔍 Search</button>
+				<button type="submit" class="search">Search</button>
 				<button type="reset" class="reset">Clear</button>
 			</div>
 

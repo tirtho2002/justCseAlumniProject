@@ -14,6 +14,20 @@
     color: #333;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
+footer {
+    margin-top: auto;
+}
+
 html, body {
     height: 100%;
     margin: 0;
@@ -76,6 +90,14 @@ html, body {
             color: red;
             font-weight: bold;
         }
+        
+        footer {
+	text-align: center;
+	padding: 15px;
+	background: rgba(0,0,0,0.25);
+	color: white;
+	font-size: 14px;
+}
     </style>
 </head>
 
@@ -126,7 +148,15 @@ html, body {
     
 
 </div>
+<div>
+<footer>
+ © 2026 All Rights Reserved by <strong>tirtho_saha</strong>
+</footer>
 
+</div>
 </body>
+
+
+
 
 </html>

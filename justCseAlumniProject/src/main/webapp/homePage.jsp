@@ -1,1317 +1,1337 @@
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %>
+<%@ page import="java.util.List"%>
+<%@ page import="java.util.Map"%>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0">
 
-    <title>Alumni Portal - Home</title>
+<title>Alumni Portal - Home</title>
 
-    <style>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
 
-        html {
-            min-height: 100%;
-        }
+/* ================= RESET ================= */
 
-        body {
-            min-height: 100vh;
-            font-family: Arial, sans-serif;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #4c1d95 0%,
-                    #6a11cb 45%,
-                    #2575fc 100%
-                );
 
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            background-size: cover;
+/* ================= BASE ================= */
 
-            color: #222;
+html {
+	min-height: 100%;
+	background: #6a11cb;
+}
 
-            display: flex;
-            flex-direction: column;
-        }
 
-        /* ================= HEADER ================= */
+body {
+	min-height: 100vh;
 
-        header {
-            width: 100%;
+	font-family: Arial, sans-serif;
 
-            background: rgba(255, 255, 255, 0.15);
+	background:
+		linear-gradient(
+			135deg,
+			#4c1d95 0%,
+			#6a11cb 45%,
+			#2575fc 100%
+		);
 
-            backdrop-filter: blur(120px);
-            -webkit-backdrop-filter: blur(12px);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
 
-            border-bottom: 1px solid rgba(255,255,255,0.2);
+	color: #222;
 
-            padding: 14px 45px;
+	display: flex;
+	flex-direction: column;
+}
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
 
-            color: white;
+/* ================= HEADER ================= */
 
-            position: sticky;
-            top: 0;
+header {
+	width: 100%;
 
-            z-index: 1000;
-        }
+	background: rgba(255, 255, 255, 0.15);
 
-        .logo {
-            font-size: 23px;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-        }
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
 
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+	border-bottom:
+		1px solid rgba(255, 255, 255, 0.2);
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
+	padding: 14px 45px;
 
-            padding: 10px 15px;
+	display: flex;
 
-            border-radius: 8px;
+	align-items: center;
 
-            transition: 0.3s;
-        }
+	justify-content: space-between;
 
-        nav a:hover {
-            background: rgba(255,255,255,0.18);
-            color: #ffda79;
-        }
+	color: white;
 
-        nav a.active {
-            background: rgba(255,255,255,0.22);
-        }
+	position: sticky;
 
-        /* ================= MAIN ================= */
+	top: 0;
 
-        main {
-            flex: 1;
-            width: 100%;
+	z-index: 1000;
+}
 
-            padding: 30px 20px;
 
-            background: transparent;
-        }
+/* ================= LOGO ================= */
 
-        .page-container {
-            max-width: 1200px;
+header h1 {
+	font-size: 22px;
+	font-weight: bold;
+}
 
-            margin: 0 auto;
 
-            display: grid;
+header h1 a {
+	color: white;
 
-            grid-template-columns:
-                240px
-                minmax(0, 1fr)
-                260px;
+	text-decoration: none;
 
-            gap: 20px;
+	font-size: inherit;
 
-            align-items: start;
-        }
+	font-weight: inherit;
 
-        /* ================= GLASS CARD ================= */
+	transition: 0.3s;
+}
 
-        .glass-card {
-            background: rgba(255,255,255,0.96);
 
-            border-radius: 14px;
+header h1 a:hover {
+	color: #ffda79;
+}
 
-            box-shadow:
-                0 8px 25px rgba(0,0,0,0.15);
 
-            padding: 20px;
-        }
+/* ================= NAV ================= */
 
-        /* ================= LEFT SIDEBAR ================= */
+nav {
+	display: flex;
 
-        .left-sidebar {
-            position: sticky;
-            top: 90px;
-        }
+	align-items: center;
 
-        .profile-mini {
-            text-align: center;
-        }
+	gap: 8px;
+}
 
-        .profile-avatar {
-            width: 75px;
-            height: 75px;
 
-            margin: 0 auto 12px;
+nav p {
+	color: white;
 
-            border-radius: 50%;
+	font-size: 14px;
+}
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #6a11cb,
-                    #2575fc
-                );
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+/* ================= MAIN ================= */
 
-            color: white;
+main {
+	flex: 1;
 
-            font-size: 28px;
-            font-weight: bold;
-        }
+	width: 100%;
 
-        .profile-mini h3 {
-            margin-bottom: 5px;
-        }
+	padding: 30px 20px;
 
-        .profile-mini p {
-            color: #777;
-            font-size: 14px;
-        }
+	background: transparent;
+}
 
-        .side-menu {
-            margin-top: 0;
 
-            display: flex;
-            flex-direction: column;
+/* ================= PAGE CONTAINER ================= */
 
-            gap: 5px;
-        }
+.page-container {
+	max-width: 1200px;
 
-        .side-menu-item {
-            display: flex;
-            align-items: center;
+	margin: 0 auto;
 
-            min-height: 44px;
+	display: grid;
 
-            padding: 11px 14px;
+	grid-template-columns:
+		240px
+		minmax(0, 1fr)
+		260px;
 
-            color: #444;
+	gap: 20px;
 
-            text-decoration: none;
+	align-items: start;
+}
 
-            font-size: 14px;
-            font-weight: 500;
 
-            border-radius: 8px;
+/* ================= GLASS CARD ================= */
 
-            transition: all 0.2s ease;
-        }
+.glass-card {
+	background: rgba(255, 255, 255, 0.96);
 
-        .side-menu-item:hover {
-            background: #f3f4ff;
-            color: #5b21b6;
+	border-radius: 14px;
 
-            transform: translateX(2px);
-        }
+	box-shadow:
+		0 8px 25px rgba(0, 0, 0, 0.15);
 
-        .side-menu-item.active {
-            background:
-                linear-gradient(
-                    135deg,
-                    #6a11cb,
-                    #2575fc
-                );
+	padding: 20px;
+}
 
-            color: white;
 
-            font-weight: 600;
+/* ================= LEFT SIDEBAR ================= */
 
-            box-shadow:
-                0 4px 10px rgba(37,117,252,0.2);
-        }
+.left-sidebar {
+	position: sticky;
 
-        .menu-divider {
-            height: 1px;
+	top: 90px;
+}
 
-            background: #e5e7eb;
 
-            margin: 12px 0;
-        }
+.side-menu {
+	display: flex;
 
-        .side-menu-item.logout {
-            color: #dc3545;
-        }
+	flex-direction: column;
 
-        .side-menu-item.logout:hover {
-            background: #fff1f2;
-            color: #dc3545;
-        }
+	gap: 5px;
+}
 
-        /* ================= FEED ================= */
 
-        .feed {
-            min-width: 0;
-        }
+.side-menu-item {
+	display: flex;
 
-        .create-post {
-            margin-bottom: 20px;
-        }
+	align-items: center;
 
-        .create-post h3 {
-            margin-bottom: 15px;
-            color: #6a11cb;
-        }
+	min-height: 44px;
 
-        .post-textarea {
-            width: 100%;
+	padding: 11px 14px;
 
-            min-height: 90px;
+	color: #444;
 
-            resize: vertical;
+	text-decoration: none;
 
-            border: 1px solid #ddd;
+	font-size: 14px;
 
-            border-radius: 10px;
+	font-weight: 500;
 
-            padding: 13px;
+	border-radius: 8px;
 
-            font-family: Arial, sans-serif;
+	transition: all 0.2s ease;
+}
 
-            outline: none;
-        }
 
-        .post-textarea:focus {
-            border-color: #6a11cb;
+.side-menu-item:hover {
+	background: #f3f4ff;
 
-            box-shadow:
-                0 0 0 2px rgba(106,17,203,0.08);
-        }
+	color: #5b21b6;
 
-        .post-options {
-            display: flex;
+	transform: translateX(2px);
+}
 
-            justify-content: space-between;
 
-            align-items: center;
+.side-menu-item.active {
+	background: transparent;
 
-            margin-top: 12px;
+	color: #444;
 
-            gap: 10px;
-        }
+	font-weight: 600;
 
-        .post-type {
-            padding: 8px;
+	box-shadow: none;
+}
 
-            border: 1px solid #ddd;
 
-            border-radius: 7px;
+.menu-divider {
+	height: 1px;
 
-            color: #333;
+	background: #e5e7eb;
 
-            background: white;
-        }
+	margin: 12px 0;
+}
 
-        .post-btn {
-            border: none;
 
-            padding: 10px 20px;
+.side-menu-item.logout {
+	color: #dc3545;
+}
 
-            border-radius: 20px;
 
-            background:
-                linear-gradient(
-                    45deg,
-                    #6a11cb,
-                    #2575fc
-                );
+.side-menu-item.logout:hover {
+	background: #fff1f2;
 
-            color: white;
+	color: #dc3545;
+}
 
-            font-weight: bold;
 
-            cursor: pointer;
+/* ================= POST A JOB ================= */
 
-            transition: 0.3s;
-        }
+.job-menu-form {
+	margin: 6px 0;
 
-        .post-btn:hover {
-            transform: scale(1.05);
-        }
+	padding: 0;
+}
 
-        /* ================= POST JOB BUTTON ================= */
 
-        .job-post-btn {
-            border: none;
+.job-menu-button {
+	width: 100%;
 
-            padding: 10px 20px;
+	min-height: 48px;
 
-            border-radius: 20px;
+	border: none;
 
-            background: #2575fc;
+	border-radius: 9px;
 
-            color: white;
+	padding: 11px 14px;
 
-            font-weight: bold;
+	background:
+		linear-gradient(
+			135deg,
+			#6a11cb,
+			#2575fc
+		);
 
-            cursor: pointer;
+	color: white;
 
-            transition: 0.3s;
-        }
+	display: flex;
 
-        .job-post-btn:hover {
-            background: #6a11cb;
+	align-items: center;
 
-            transform: scale(1.05);
-        }
+	justify-content: center;
 
-        /* ================= POST ================= */
+	font-family: Arial, sans-serif;
 
-        .post {
-            margin-bottom: 20px;
-        }
+	font-size: 14px;
 
-        .post-header {
-            display: flex;
+	font-weight: 600;
 
-            align-items: center;
+	cursor: pointer;
 
-            gap: 12px;
-        }
+	box-shadow:
+		0 5px 14px
+		rgba(106, 17, 203, 0.25);
 
-        .post-avatar {
-            width: 48px;
-            height: 48px;
+	transition:
+		transform 0.25s ease,
+		box-shadow 0.25s ease,
+		background 0.25s ease;
+}
 
-            flex-shrink: 0;
 
-            border-radius: 50%;
+.job-menu-button:hover {
+	background:
+		linear-gradient(
+			135deg,
+			#2575fc,
+			#6a11cb
+		);
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #6a11cb,
-                    #2575fc
-                );
+	transform: translateY(-2px);
 
-            display: flex;
+	box-shadow:
+		0 7px 18px
+		rgba(37, 117, 252, 0.32);
+}
 
-            align-items: center;
-            justify-content: center;
 
-            color: white;
+.job-menu-button:active {
+	transform: translateY(0);
 
-            font-weight: bold;
-        }
+	box-shadow:
+		0 3px 8px
+		rgba(37, 117, 252, 0.22);
+}
 
-        .post-user h4 {
-            margin-bottom: 3px;
-        }
 
-        .post-user span {
-            font-size: 12px;
-            color: #777;
-        }
+.job-menu-button span {
+	width: 100%;
 
-        .post-content {
-            margin-top: 18px;
+	text-align: center;
+}
 
-            line-height: 1.6;
 
-            color: #333;
-        }
+/* ================= FEED ================= */
 
-        /* ================= JOB CARD ================= */
+.feed {
+	min-width: 0;
+}
 
-        .job-card {
-            margin-top: 15px;
 
-            padding: 18px;
+.create-post {
+	margin-bottom: 20px;
+}
 
-            border-radius: 10px;
 
-            background: #f5f7ff;
+.create-post h3 {
+	margin-bottom: 15px;
 
-            border-left: 5px solid #2575fc;
-        }
+	color: #6a11cb;
+}
 
-        .job-card h3 {
-            color: #2575fc;
 
-            margin-bottom: 8px;
-        }
+.post-textarea {
+	width: 100%;
 
-        .job-card p {
-            margin: 6px 0;
+	min-height: 90px;
 
-            font-size: 14px;
-        }
+	resize: vertical;
 
-        .apply-btn {
-            display: inline-block;
+	border: 1px solid #ddd;
 
-            margin-top: 12px;
+	border-radius: 10px;
 
-            padding: 9px 18px;
+	padding: 13px;
 
-            background: #2575fc;
+	font-family: Arial, sans-serif;
 
-            color: white;
+	outline: none;
+}
 
-            text-decoration: none;
 
-            border-radius: 7px;
+.post-textarea:focus {
+	border-color: #6a11cb;
 
-            font-weight: bold;
-        }
+	box-shadow:
+		0 0 0 2px
+		rgba(106, 17, 203, 0.08);
+}
 
-        .apply-btn:hover {
-            background: #6a11cb;
-        }
 
-        /* ================= POST ACTIONS ================= */
+.post-options {
+	display: flex;
 
-        .post-actions {
-            display: flex;
+	justify-content: space-between;
 
-            gap: 10px;
+	align-items: center;
 
-            margin-top: 18px;
+	margin-top: 12px;
 
-            padding-top: 12px;
+	gap: 10px;
+}
 
-            border-top: 1px solid #eee;
-        }
 
-        .post-actions button {
-            border: none;
+.post-btn {
+	border: none;
 
-            background: transparent;
+	padding: 10px 20px;
 
-            padding: 8px 15px;
+	border-radius: 20px;
 
-            border-radius: 7px;
+	background:
+		linear-gradient(
+			45deg,
+			#6a11cb,
+			#2575fc
+		);
 
-            cursor: pointer;
+	color: white;
 
-            color: #555;
+	font-weight: bold;
 
-            font-weight: bold;
+	cursor: pointer;
 
-            transition: 0.3s;
-        }
+	transition: 0.3s;
+}
 
-        .post-actions button:hover {
-            background: #f0f3ff;
 
-            color: #2575fc;
-        }
+.post-btn:hover {
+	transform: scale(1.05);
+}
 
-        /* ================= RIGHT SIDEBAR ================= */
 
-        .right-sidebar {
-            position: sticky;
-            top: 90px;
-        }
+/* ================= POST ================= */
 
-        .right-card {
-            margin-bottom: 20px;
-        }
+.post {
+	margin-bottom: 20px;
+}
 
-        .right-card h3 {
-            color: #6a11cb;
 
-            margin-bottom: 15px;
-        }
+.post-header {
+	display: flex;
 
-        .recommendation {
-            display: flex;
+	align-items: center;
 
-            align-items: center;
+	gap: 12px;
+}
 
-            gap: 10px;
 
-            padding: 10px 0;
+.post-avatar {
+	width: 48px;
 
-            border-bottom: 1px solid #eee;
-        }
+	height: 48px;
 
-        .recommendation:last-child {
-            border-bottom: none;
-        }
+	flex-shrink: 0;
 
-        .recommend-avatar {
-            width: 42px;
-            height: 42px;
+	border-radius: 50%;
 
-            flex-shrink: 0;
+	background:
+		linear-gradient(
+			135deg,
+			#6a11cb,
+			#2575fc
+		);
 
-            border-radius: 50%;
+	display: flex;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #6a11cb,
-                    #2575fc
-                );
+	align-items: center;
 
-            color: white;
+	justify-content: center;
 
-            display: flex;
+	color: white;
 
-            align-items: center;
-            justify-content: center;
+	font-weight: bold;
+}
 
-            font-weight: bold;
-        }
 
-        .recommend-info {
-            flex: 1;
-        }
+.post-user h4 {
+	margin-bottom: 3px;
+}
 
-        .recommend-info strong {
-            display: block;
 
-            font-size: 14px;
-        }
+.post-user span {
+	font-size: 12px;
 
-        .recommend-info span {
-            font-size: 12px;
+	color: #777;
+}
 
-            color: #777;
-        }
 
-        .connect-btn {
-            border: 1px solid #2575fc;
+.post-content {
+	margin-top: 18px;
 
-            background: white;
+	line-height: 1.6;
 
-            color: #2575fc;
+	color: #333;
+}
 
-            padding: 5px 9px;
 
-            border-radius: 6px;
+/* ================= JOB CARD ================= */
 
-            cursor: pointer;
+.job-card {
+	margin-top: 15px;
 
-            font-size: 12px;
-        }
+	padding: 18px;
 
-        .connect-btn:hover {
-            background: #2575fc;
+	border-radius: 10px;
 
-            color: white;
-        }
+	background: #f5f7ff;
 
-        /* ================= FOOTER ================= */
+	border-left:
+		5px solid #2575fc;
+}
 
-        footer {
-            width: 100%;
 
-            background: rgba(255,255,255,0.15);
+.job-card h3 {
+	color: #2575fc;
 
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+	margin-bottom: 8px;
+}
 
-            border-top:
-                1px solid rgba(255,255,255,0.15);
 
-            color: white;
+.job-card p {
+	margin: 6px 0;
 
-            text-align: center;
+	font-size: 14px;
+}
 
-            padding: 15px;
 
-            font-size: 14px;
-        }
+.apply-btn {
+	display: inline-block;
 
-        /* ================= RESPONSIVE ================= */
+	margin-top: 12px;
 
-        @media (max-width: 1000px) {
+	padding: 9px 18px;
 
-            .page-container {
-                grid-template-columns:
-                    200px
-                    minmax(0, 1fr);
-            }
+	background: #2575fc;
 
-            .right-sidebar {
-                display: none;
-            }
-        }
+	color: white;
 
-        @media (max-width: 700px) {
+	text-decoration: none;
 
-            header {
-                padding: 12px 18px;
+	border-radius: 7px;
 
-                flex-direction: column;
+	font-weight: bold;
+}
 
-                gap: 10px;
-            }
 
-            nav {
-                flex-wrap: wrap;
+.apply-btn:hover {
+	background: #6a11cb;
+}
 
-                justify-content: center;
-            }
 
-            nav a {
-                padding: 8px 10px;
+/* ================= POST ACTIONS ================= */
 
-                font-size: 13px;
-            }
+.post-actions {
+	display: flex;
 
-            main {
-                padding: 20px 10px;
-            }
+	gap: 10px;
 
-            .page-container {
-                grid-template-columns: 1fr;
-            }
+	margin-top: 18px;
 
-            .left-sidebar {
-                position: static;
-            }
+	padding-top: 12px;
 
-            .side-menu {
-                display: grid;
+	border-top: 1px solid #eee;
+}
 
-                grid-template-columns: 1fr 1fr;
 
-                gap: 6px;
-            }
+.post-actions button {
+	border: none;
 
-            .menu-divider {
-                display: none;
-            }
+	background: transparent;
 
-            .side-menu-item {
-                justify-content: center;
-            }
+	padding: 8px 15px;
 
-            .post-options {
-                flex-direction: column;
+	border-radius: 7px;
 
-                align-items: stretch;
-            }
+	cursor: pointer;
 
-            .post-btn,
-            .job-post-btn {
-                width: 100%;
-            }
-        }
+	color: #555;
 
-    </style>
+	font-weight: bold;
+
+	transition: 0.3s;
+}
+
+
+.post-actions button:hover {
+	background: #f0f3ff;
+
+	color: #2575fc;
+}
+
+
+/* ================= RIGHT SIDEBAR ================= */
+
+.right-sidebar {
+	position: sticky;
+
+	top: 90px;
+}
+
+
+.right-card {
+	margin-bottom: 20px;
+}
+
+
+.right-card h3 {
+	color: #6a11cb;
+
+	margin-bottom: 15px;
+}
+
+
+.recommendation {
+	display: flex;
+
+	align-items: center;
+
+	gap: 10px;
+
+	padding: 10px 0;
+
+	border-bottom: 1px solid #eee;
+}
+
+
+.recommendation:last-child {
+	border-bottom: none;
+}
+
+
+.recommend-avatar {
+	width: 42px;
+
+	height: 42px;
+
+	flex-shrink: 0;
+
+	border-radius: 50%;
+
+	background:
+		linear-gradient(
+			135deg,
+			#6a11cb,
+			#2575fc
+		);
+
+	color: white;
+
+	display: flex;
+
+	align-items: center;
+
+	justify-content: center;
+
+	font-weight: bold;
+}
+
+
+.recommend-info {
+	flex: 1;
+}
+
+
+.recommend-info strong {
+	display: block;
+
+	font-size: 14px;
+}
+
+
+.recommend-info span {
+	font-size: 12px;
+
+	color: #777;
+}
+
+
+.connect-btn {
+	border: 1px solid #2575fc;
+
+	background: white;
+
+	color: #2575fc;
+
+	padding: 5px 9px;
+
+	border-radius: 6px;
+
+	cursor: pointer;
+
+	font-size: 12px;
+}
+
+
+.connect-btn:hover {
+	background: #2575fc;
+
+	color: white;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+	width: 100%;
+
+	background:
+		rgba(0, 0, 0, 0.20);
+
+	backdrop-filter: blur(8px);
+
+	-webkit-backdrop-filter: blur(8px);
+
+	border-top:
+		1px solid
+		rgba(255, 255, 255, 0.15);
+
+	color: white;
+
+	text-align: center;
+
+	padding: 15px;
+
+	font-size: 14px;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1000px) {
+
+	.page-container {
+		grid-template-columns:
+			200px
+			minmax(0, 1fr);
+	}
+
+	.right-sidebar {
+		display: none;
+	}
+
+}
+
+
+@media (max-width: 700px) {
+
+	header {
+		padding: 12px 18px;
+
+		flex-direction: column;
+
+		gap: 10px;
+	}
+
+
+	header h1 {
+		font-size: 20px;
+	}
+
+
+	nav {
+		flex-wrap: wrap;
+
+		justify-content: center;
+	}
+
+
+	main {
+		padding: 20px 10px;
+	}
+
+
+	.page-container {
+		grid-template-columns: 1fr;
+	}
+
+
+	.left-sidebar {
+		position: static;
+	}
+
+
+	.side-menu {
+		display: grid;
+
+		grid-template-columns:
+			1fr 1fr;
+
+		gap: 6px;
+	}
+
+
+	.menu-divider {
+		display: none;
+	}
+
+
+	.side-menu-item {
+		justify-content: center;
+	}
+
+
+	.job-menu-button {
+		justify-content: center;
+	}
+
+
+	.job-menu-button span {
+		text-align: center;
+	}
+
+
+	.post-options {
+		flex-direction: column;
+
+		align-items: stretch;
+	}
+
+
+	.post-btn {
+		width: 100%;
+	}
+
+}
+
+</style>
 
 </head>
 
+
 <body>
 
-    <!-- ================= HEADER ================= -->
 
-    <header>
+<!-- ================= HEADER ================= -->
 
-        <div class="logo">
-            Alumni Portal
-        </div>
+<header>
 
-        <nav>
+	<h1>
 
-            <p>
-                <strong>
-                    Hello!! <%=request.getAttribute("name")%>
-                </strong>
-            </p>
+		<a href="loginToHomeServlet">
+			Alumni Portal
+		</a>
 
-<%--
-            <a href="homepage.jsp" class="active">
-                Home
-            </a>
+	</h1>
 
-            <a href="alumniSearchPage.html">
-                Alumni
-            </a>
 
-            <a href="recommendedAlumniServlet">
-                Recommended SkillMates
-            </a>
+	<nav>
 
-            <a href="messageSenderListServlet">
-                Messages
-            </a>
+		<p>
 
-            <a href="profile.jsp">
-                Profile
-            </a>
---%>
+			<strong>
+				Hello!! <%=request.getAttribute("name")%>
+			</strong>
 
-        </nav>
+		</p>
 
-    </header>
+	</nav>
 
+</header>
 
-    <!-- ================= MAIN ================= -->
 
-    <main>
 
-        <div class="page-container">
+<!-- ================= MAIN ================= -->
 
+<main>
 
-            <!-- ================= LEFT SIDEBAR ================= -->
+<div class="page-container">
 
-            <aside class="left-sidebar">
 
-                <div class="glass-card">
+	<!-- ================= LEFT SIDEBAR ================= -->
 
-                    <div class="side-menu">
+	<aside class="left-sidebar">
 
-                        <a href="homepage.jsp"
-                           class="side-menu-item active">
+		<div class="glass-card">
 
-                            <span>
-                                Home
-                            </span>
+			<div class="side-menu">
 
-                        </a>
 
+				<!-- HOME -->
 
-                        <a href="alumniSearchPage.jsp"
-                           class="side-menu-item">
+				<a href="homepage.jsp"
+				   class="side-menu-item active">
 
-                            <span>
-                                Alumni
-                            </span>
+					<span>
+						Home
+					</span>
 
-                        </a>
+				</a>
 
 
-                        <a href="#"
-                           class="side-menu-item"
-                           onclick="document.getElementById('recommendForm').submit(); return false;">
+				<!-- ALUMNI -->
 
-                            <span>
-                                Recommended SkillMates
-                            </span>
+				<a href="alumniSearchPage.jsp"
+				   class="side-menu-item">
 
-                        </a>
+					<span>
+						Alumni
+					</span>
 
+				</a>
 
-                        <form id="recommendForm"
-                              action="recommendedAlumniServlet"
-                              method="post"
-                              style="display:none;">
 
-                            <input type="hidden"
-                                   name="batch"
-                                   value="<%=request.getAttribute("batchNo")%>">
+				<!-- RECOMMENDED SKILLMATES -->
 
-                        </form>
+				<a href="#"
+				   class="side-menu-item"
+				   onclick="
+					   document
+					   .getElementById('recommendForm')
+					   .submit();
+					   return false;
+				   ">
 
+					<span>
+						Recommended SkillMates
+					</span>
 
-                        <a href="messageSenderListServlet"
-                           class="side-menu-item">
+				</a>
 
-                            <span>
-                                Messages
-                            </span>
 
-                        </a>
+				<form id="recommendForm"
+					  action="recommendedAlumniServlet"
+					  method="post"
+					  style="display:none;">
 
+					<input type="hidden"
+						   name="batch"
+						   value="<%=request.getAttribute("batchNo")%>">
 
-<%
-    String role = (String) session.getAttribute("role");
-%>
+				</form>
 
 
-                        <a href="<%= "alumni".equalsIgnoreCase(role)
-                                ? "alumniProfile"
-                                : "studentProfile" %>"
-                           class="side-menu-item">
+				<!-- MESSAGES -->
 
-                            <span>
-                                My Profile
-                            </span>
+				<a href="messageSenderListServlet"
+				   class="side-menu-item">
 
-                        </a>
+					<span>
+						Messages
+					</span>
 
+				</a>
 
-                        <div class="menu-divider"></div>
 
+				<!-- MY PROFILE -->
 
-  <%
-    if ("alumni".equalsIgnoreCase(role)) {
-%>
+				<%
 
- 
-                        <a href=""
-                           class="side-menu-item">
+					String role =
+						(String) session.getAttribute("role");
 
-                            <span>
-                                Post a Job
-                            </span>
+				%>
 
-                        </a>
-                        
-      <%}%>
-      
-      
-                        <a href="loginPage.html"
-                           class="side-menu-item logout">
 
-                            <span>
-                                Logout
-                            </span>
+				<a href="<%= "alumni".equalsIgnoreCase(role)
+						? "alumniProfile"
+						: "studentProfile" %>"
+				   class="side-menu-item">
 
-                        </a>
-                        
+					<span>
+						My Profile
+					</span>
 
+				</a>
+				
+				
+				<!-- LOGOUT -->
 
-                    </div>
+				<a href="loginPage.html"
+				   class="side-menu-item logout">
 
-                </div>
+					<span>
+						Logout
+					</span>
 
-            </aside>
+				</a>
 
 
-            <!-- ================= CENTER FEED ================= -->
 
-            <section class="feed">
 
+				<!-- DIVIDER -->
 
-                <!-- CREATE POST -->
+				<div class="menu-divider"></div>
+				
+				<!-- POST A JOB -->
 
-                <div class="glass-card create-post">
+				<%
 
-                    <h3>
-                        What's on your mind?
-                    </h3>
+					if ("alumni".equalsIgnoreCase(role)) {
 
+				%>
 
-                    <form action="createPostServlet"
-                          method="post">
 
+				<form action="postManagerServlet"
+					  method="post"
+					  class="job-menu-form">
 
-                        <textarea
-                            class="post-textarea"
-                            name="content"
-                            placeholder="What's on your mind? Share an update with the alumni community..."
-                            required></textarea>
+					<input type="hidden"
+						   name="formType"
+						   value="job">
 
 
-                        <div class="post-options">
+					<button type="submit"
+							class="job-menu-button">
 
+						<span>
+							Post a Job
+						</span>
 
-                           
+					</button>
 
+				</form>
 
-                            <button
-                                type="submit"
-                                class="post-btn">
 
-                                Post
+				<%
 
-                            </button>
+					}
 
+				%>
 
 
+			</div>
 
-                        </div>
+		</div>
 
-                    </form>
+	</aside>
 
-                </div>
 
 
-                <!-- ================= POST 1 ================= -->
+	<!-- ================= CENTER FEED ================= -->
 
-                <div class="glass-card post">
+	<section class="feed">
 
-                    <div class="post-header">
 
-                        <div class="post-avatar">
-                            R
-                        </div>
+		<!-- CREATE POST -->
 
-                        <div class="post-user">
+		<div class="glass-card create-post">
 
-                            <h4>
-                                Rahim Ahmed
-                            </h4>
+			<h3>
+				What's on your mind?
+			</h3>
 
-                            <span>
-                                JUST CSE Batch 2019
-                                2 hours ago
-                            </span>
 
-                        </div>
+			<form action="postManagerServlet"
+				  method="post">
 
-                    </div>
 
+				<textarea
+					class="post-textarea"
+					name="mindContent"
+					placeholder="What's on your mind? Share an update with the alumni community..."
+					required></textarea>
 
-                    <div class="post-content">
 
-                        <p>
-                            Happy to share that I have joined
-                            ABC Technologies as a Software Engineer.
-                            Thanks to everyone from our alumni
-                            community for their support!
-                        </p>
+				<input type="hidden"
+					   name="formType"
+					   value="mind">
 
-                    </div>
 
+				<div class="post-options">
 
-                    <div class="post-actions">
+					<button
+						type="submit"
+						class="post-btn">
 
-                        <button>
-                            Like
-                        </button>
+						Post
 
-                        <button>
-                            Comment
-                        </button>
+					</button>
 
-                        <button>
-                            Share
-                        </button>
+				</div>
 
-                    </div>
+			</form>
 
-                </div>
+		</div>
 
 
-                <!-- ================= POST 2 ================= -->
 
-                <div class="glass-card post">
+		<!-- ================= POST 1 ================= -->
 
-                    <div class="post-header">
+		<div class="glass-card post">
 
-                        <div class="post-avatar">
-                            K
-                        </div>
+			<div class="post-header">
 
-                        <div class="post-user">
+				<div class="post-avatar">
+					R
+				</div>
 
-                            <h4>
-                                Karim Hasan
-                            </h4>
 
-                            <span>
-                                JUST CSE Batch 2017
-                                5 hours ago
-                            </span>
+				<div class="post-user">
 
-                        </div>
+					<h4>
+						Rahim Ahmed
+					</h4>
 
-                    </div>
 
+					<span>
+						JUST CSE Batch 2019
+						2 hours ago
+					</span>
 
-                    <div class="post-content">
+				</div>
 
-                        <p>
-                            We are currently hiring Software
-                            Engineers. Interested alumni and
-                            students can apply below.
-                        </p>
+			</div>
 
 
-                        <div class="job-card">
+			<div class="post-content">
 
-                            <h3>
-                                Software Engineer
-                            </h3>
+				<p>
 
-                            <p>
-                                <strong>Company:</strong>
-                                XYZ Technologies
-                            </p>
+					Happy to share that I have joined
+					ABC Technologies as a Software Engineer.
+					Thanks to everyone from our alumni
+					community for their support!
 
-                            <p>
-                                <strong>Location:</strong>
-                                Dhaka, Bangladesh
-                            </p>
+				</p>
 
-                            <p>
-                                <strong>Experience:</strong>
-                                Freshers / 0-2 years
-                            </p>
+			</div>
 
-                            <a href="#"
-                               class="apply-btn">
 
-                                Apply Now
+			<div class="post-actions">
 
-                            </a>
+				<button>
+					Like
+				</button>
 
-                        </div>
+				<button>
+					Comment
+				</button>
 
-                    </div>
+				<button>
+					Share
+				</button>
 
+			</div>
 
-                    <div class="post-actions">
+		</div>
 
-                        <button>
-                            Like
-                        </button>
 
-                        <button>
-                            Comment
-                        </button>
+	</section>
 
-                        <button>
-                            Share
-                        </button>
 
-                    </div>
 
-                </div>
+	<!-- ================= RIGHT SIDEBAR ================= -->
 
+	<aside class="right-sidebar">
 
-                <!-- ================= POST 3 ================= -->
 
-                <div class="glass-card post">
+		<!-- RECOMMENDED SKILLMATES -->
 
-                    <div class="post-header">
+		<div class="glass-card right-card">
 
-                        <div class="post-avatar">
-                            S
-                        </div>
+			<h3>
+				Recommended SkillMates
+			</h3>
 
-                        <div class="post-user">
 
-                            <h4>
-                                Sumi Akter
-                            </h4>
+			<div class="recommendation">
 
-                            <span>
-                                JUST CSE Batch 2020
-                                Yesterday
-                            </span>
+				<div class="recommend-avatar">
+					A
+				</div>
 
-                        </div>
 
-                    </div>
+				<div class="recommend-info">
 
+					<strong>
+						Arif Hasan
+					</strong>
 
-                    <div class="post-content">
+					<span>
+						Java, Spring Boot
+					</span>
 
-                        <p>
-                            Our alumni community keeps growing!
-                            Looking forward to connecting with
-                            more juniors and helping them build
-                            their software engineering careers.
-                        </p>
+				</div>
 
-                    </div>
 
+				<button class="connect-btn">
+					Connect
+				</button>
 
-                    <div class="post-actions">
+			</div>
 
-                        <button>
-                            Like
-                        </button>
 
-                        <button>
-                            Comment
-                        </button>
+			<div class="recommendation">
 
-                        <button>
-                            Share
-                        </button>
+				<div class="recommend-avatar">
+					N
+				</div>
 
-                    </div>
 
-                </div>
+				<div class="recommend-info">
 
+					<strong>
+						Nusrat Jahan
+					</strong>
 
-            </section>
+					<span>
+						Python, ML
+					</span>
 
+				</div>
 
-            <!-- ================= RIGHT SIDEBAR ================= -->
 
-            <aside class="right-sidebar">
+				<button class="connect-btn">
+					Connect
+				</button>
 
+			</div>
 
-                <!-- RECOMMENDED SKILLMATES -->
 
-                <div class="glass-card right-card">
+			<div class="recommendation">
 
-                    <h3>
-                        Recommended SkillMates
-                    </h3>
+				<div class="recommend-avatar">
+					T
+				</div>
 
 
-                    <div class="recommendation">
+				<div class="recommend-info">
 
-                        <div class="recommend-avatar">
-                            A
-                        </div>
+					<strong>
+						Tanvir Ahmed
+					</strong>
 
-                        <div class="recommend-info">
+					<span>
+						C++, CP
+					</span>
 
-                            <strong>
-                                Arif Hasan
-                            </strong>
+				</div>
 
-                            <span>
-                                Java, Spring Boot
-                            </span>
 
-                        </div>
+				<button class="connect-btn">
+					Connect
+				</button>
 
-                        <button class="connect-btn">
-                            Connect
-                        </button>
+			</div>
 
-                    </div>
 
+			<div style="margin-top:15px;">
 
-                    <div class="recommendation">
+				<a href="recommendedAlumniServlet"
+				   style="
+				   color:#2575fc;
+				   text-decoration:none;
+				   font-weight:bold;
+				   font-size:14px;">
 
-                        <div class="recommend-avatar">
-                            N
-                        </div>
+					View all SkillMates
 
-                        <div class="recommend-info">
+				</a>
 
-                            <strong>
-                                Nusrat Jahan
-                            </strong>
+			</div>
 
-                            <span>
-                                Python, ML
-                            </span>
+		</div>
 
-                        </div>
 
-                        <button class="connect-btn">
-                            Connect
-                        </button>
 
-                    </div>
+		<!-- LATEST JOBS -->
 
+		<div class="glass-card right-card">
 
-                    <div class="recommendation">
+			<h3>
+				Latest Jobs
+			</h3>
 
-                        <div class="recommend-avatar">
-                            T
-                        </div>
 
-                        <div class="recommend-info">
+			<div style="
+				padding:10px 0;
+				border-bottom:1px solid #eee;">
 
-                            <strong>
-                                Tanvir Ahmed
-                            </strong>
+				<strong>
+					Software Engineer
+				</strong>
 
-                            <span>
-                                C++ ,CP
-                            </span>
 
-                        </div>
+				<p style="
+					font-size:12px;
+					color:#777;
+					margin-top:5px;">
 
-                        <button class="connect-btn">
-                            Connect
-                        </button>
+					ABC Technologies
 
-                    </div>
+				</p>
 
+			</div>
 
-                    <div style="margin-top:15px;">
 
-                        <a href="recommendedAlumniServlet"
-                           style="
-                           color:#2575fc;
-                           text-decoration:none;
-                           font-weight:bold;
-                           font-size:14px;">
+			<div style="
+				padding:10px 0;">
 
-                            View all SkillMates
+				<strong>
+					Junior Java Developer
+				</strong>
 
-                        </a>
 
-                    </div>
+				<p style="
+					font-size:12px;
+					color:#777;
+					margin-top:5px;">
 
-                </div>
+					XYZ Ltd.
 
+				</p>
 
-                <!-- LATEST JOBS -->
+			</div>
 
-                <div class="glass-card right-card">
+		</div>
 
-                    <h3>
-                        Latest Jobs
-                    </h3>
+	</aside>
 
 
-                    <div style="
-                        padding:10px 0;
-                        border-bottom:1px solid #eee;">
+</div>
 
-                        <strong>
-                            Software Engineer
-                        </strong>
+</main>
 
-                        <p style="
-                            font-size:12px;
-                            color:#777;
-                            margin-top:5px;">
 
-                            ABC Technologies
 
-                        </p>
+<!-- ================= FOOTER ================= -->
 
-                    </div>
+<footer>
 
+	&copy; 2026 All Rights Reserved by
 
-                    <div style="
-                        padding:10px 0;">
+	<strong>
+		tirtho_saha
+	</strong>
 
-                        <strong>
-                            Junior Java Developer
-                        </strong>
-
-                        <p style="
-                            font-size:12px;
-                            color:#777;
-                            margin-top:5px;">
-
-                            XYZ Ltd.
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </aside>
-
-
-        </div>
-
-    </main>
-
-
-    <!-- ================= FOOTER ================= -->
-
-    <footer>
-
-        &copy; 2026 All Rights Reserved by
-        <strong>tirtho_saha</strong>
-
-    </footer>
+</footer>
 
 
 </body>

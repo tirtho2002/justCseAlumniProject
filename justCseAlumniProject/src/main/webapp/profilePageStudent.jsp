@@ -57,6 +57,17 @@ header h1 {
 	font-size: 22px;
 }
 
+header h1 a {
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+header h1 a:hover {
+    color: #ffda79;
+}
+
 nav {
 	display: flex;
 	gap: 20px;
@@ -235,7 +246,14 @@ footer {
 <body>
 
 <header>
-	<h1>Alumni Portal</h1>
+	<h1>
+	<a href="loginToHomeServlet">
+		Alumni Portal
+		
+		</a>
+	</h1>	
+	
+	
 	<nav>
 
 		

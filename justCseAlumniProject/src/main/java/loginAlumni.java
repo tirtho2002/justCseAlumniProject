@@ -98,6 +98,7 @@ public class loginAlumni extends HttpServlet {
 			e.printStackTrace();
 		}
 
+		
 		request.getRequestDispatcher("profilePageAlumni.jsp").forward(request, response);
 	}
 }

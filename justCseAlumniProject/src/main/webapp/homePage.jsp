@@ -1,5 +1,15 @@
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Map"%>
+<%@ page import="java.sql.Timestamp"%>
+
+<%
+    String role = (String) session.getAttribute("role");
+    String userName = (String) request.getAttribute("name");
+    String batchNo = (String) request.getAttribute("batchNo");
+
+    List<Map<String, Object>> posts =
+            (List<Map<String, Object>>) request.getAttribute("posts");
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +19,7 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-	content="width=device-width, initial-scale=1.0">
+      content="width=device-width, initial-scale=1.0">
 
 <title>Alumni Portal - Home</title>
 
@@ -19,716 +29,739 @@
 /* ================= RESET ================= */
 
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 
 /* ================= BASE ================= */
 
 html {
-	min-height: 100%;
-	background: #6a11cb;
+    min-height: 100%;
+    background: #6a11cb;
 }
 
 
 body {
-	min-height: 100vh;
+    min-height: 100vh;
 
-	font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif;
 
-	background:
-		linear-gradient(
-			135deg,
-			#4c1d95 0%,
-			#6a11cb 45%,
-			#2575fc 100%
-		);
+    background:
+        linear-gradient(
+            135deg,
+            #4c1d95 0%,
+            #6a11cb 45%,
+            #2575fc 100%
+        );
 
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-	background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
 
-	color: #222;
+    color: #222;
 
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 
 /* ================= HEADER ================= */
 
 header {
-	width: 100%;
+    width: 100%;
 
-	background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.15);
 
-	backdrop-filter: blur(12px);
-	-webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 
-	border-bottom:
-		1px solid rgba(255, 255, 255, 0.2);
+    border-bottom:
+        1px solid rgba(255, 255, 255, 0.2);
 
-	padding: 14px 45px;
+    padding: 14px 45px;
 
-	display: flex;
+    display: flex;
 
-	align-items: center;
+    align-items: center;
 
-	justify-content: space-between;
+    justify-content: space-between;
 
-	color: white;
+    color: white;
 
-	position: sticky;
+    position: sticky;
 
-	top: 0;
+    top: 0;
 
-	z-index: 1000;
+    z-index: 1000;
 }
 
 
 /* ================= LOGO ================= */
 
 header h1 {
-	font-size: 22px;
-	font-weight: bold;
+    font-size: 22px;
+    font-weight: bold;
 }
 
 
 header h1 a {
-	color: white;
+    color: white;
 
-	text-decoration: none;
+    text-decoration: none;
 
-	font-size: inherit;
+    font-size: inherit;
 
-	font-weight: inherit;
+    font-weight: inherit;
 
-	transition: 0.3s;
+    transition: 0.3s;
 }
 
 
 header h1 a:hover {
-	color: #ffda79;
+    color: #ffda79;
 }
 
 
 /* ================= NAV ================= */
 
 nav {
-	display: flex;
+    display: flex;
 
-	align-items: center;
+    align-items: center;
 
-	gap: 8px;
+    gap: 8px;
 }
 
 
 nav p {
-	color: white;
+    color: white;
 
-	font-size: 14px;
+    font-size: 14px;
 }
 
 
 /* ================= MAIN ================= */
 
 main {
-	flex: 1;
+    flex: 1;
 
-	width: 100%;
+    width: 100%;
 
-	padding: 30px 20px;
+    padding: 30px 20px;
 
-	background: transparent;
+    background: transparent;
 }
 
 
 /* ================= PAGE CONTAINER ================= */
 
 .page-container {
-	max-width: 1200px;
+    max-width: 1200px;
 
-	margin: 0 auto;
+    margin: 0 auto;
 
-	display: grid;
+    display: grid;
 
-	grid-template-columns:
-		240px
-		minmax(0, 1fr)
-		260px;
+    grid-template-columns:
+        240px
+        minmax(0, 1fr)
+        260px;
 
-	gap: 20px;
+    gap: 20px;
 
-	align-items: start;
+    align-items: start;
 }
 
 
 /* ================= GLASS CARD ================= */
 
 .glass-card {
-	background: rgba(255, 255, 255, 0.96);
+    background: rgba(255, 255, 255, 0.96);
 
-	border-radius: 14px;
+    border-radius: 14px;
 
-	box-shadow:
-		0 8px 25px rgba(0, 0, 0, 0.15);
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.15);
 
-	padding: 20px;
+    padding: 20px;
 }
 
 
 /* ================= LEFT SIDEBAR ================= */
 
 .left-sidebar {
-	position: sticky;
+    position: sticky;
 
-	top: 90px;
+    top: 90px;
 }
 
 
 .side-menu {
-	display: flex;
+    display: flex;
 
-	flex-direction: column;
+    flex-direction: column;
 
-	gap: 5px;
+    gap: 5px;
 }
 
 
 .side-menu-item {
-	display: flex;
+    display: flex;
 
-	align-items: center;
+    align-items: center;
 
-	min-height: 44px;
+    min-height: 44px;
 
-	padding: 11px 14px;
+    padding: 11px 14px;
 
-	color: #444;
+    color: #444;
 
-	text-decoration: none;
+    text-decoration: none;
 
-	font-size: 14px;
+    font-size: 14px;
 
-	font-weight: 500;
+    font-weight: 500;
 
-	border-radius: 8px;
+    border-radius: 8px;
 
-	transition: all 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 
 .side-menu-item:hover {
-	background: #f3f4ff;
+    background: #f3f4ff;
 
-	color: #5b21b6;
+    color: #5b21b6;
 
-	transform: translateX(2px);
+    transform: translateX(2px);
 }
 
 
 .side-menu-item.active {
-	background: transparent;
+    background: transparent;
 
-	color: #444;
+    color: #444;
 
-	font-weight: 600;
+    font-weight: 600;
 
-	box-shadow: none;
+    box-shadow: none;
 }
 
 
 .menu-divider {
-	height: 1px;
+    height: 1px;
 
-	background: #e5e7eb;
+    background: #e5e7eb;
 
-	margin: 12px 0;
+    margin: 12px 0;
 }
 
 
 .side-menu-item.logout {
-	color: #dc3545;
+    color: #dc3545;
 }
 
 
 .side-menu-item.logout:hover {
-	background: #fff1f2;
+    background: #fff1f2;
 
-	color: #dc3545;
+    color: #dc3545;
 }
 
 
 /* ================= POST A JOB ================= */
 
 .job-menu-form {
-	margin: 6px 0;
+    margin: 6px 0;
 
-	padding: 0;
+    padding: 0;
 }
 
 
 .job-menu-button {
-	width: 100%;
+    width: 100%;
 
-	min-height: 48px;
+    min-height: 48px;
 
-	border: none;
+    border: none;
 
-	border-radius: 9px;
+    border-radius: 9px;
 
-	padding: 11px 14px;
+    padding: 11px 14px;
 
-	background:
-		linear-gradient(
-			135deg,
-			#6a11cb,
-			#2575fc
-		);
+    background:
+        linear-gradient(
+            135deg,
+            #6a11cb,
+            #2575fc
+        );
 
-	color: white;
+    color: white;
 
-	display: flex;
+    display: flex;
 
-	align-items: center;
+    align-items: center;
 
-	justify-content: center;
+    justify-content: center;
 
-	font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif;
 
-	font-size: 14px;
+    font-size: 14px;
 
-	font-weight: 600;
+    font-weight: 600;
 
-	cursor: pointer;
+    cursor: pointer;
 
-	box-shadow:
-		0 5px 14px
-		rgba(106, 17, 203, 0.25);
+    box-shadow:
+        0 5px 14px
+        rgba(106, 17, 203, 0.25);
 
-	transition:
-		transform 0.25s ease,
-		box-shadow 0.25s ease,
-		background 0.25s ease;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
 }
 
 
 .job-menu-button:hover {
-	background:
-		linear-gradient(
-			135deg,
-			#2575fc,
-			#6a11cb
-		);
+    background:
+        linear-gradient(
+            135deg,
+            #2575fc,
+            #6a11cb
+        );
 
-	transform: translateY(-2px);
+    transform: translateY(-2px);
 
-	box-shadow:
-		0 7px 18px
-		rgba(37, 117, 252, 0.32);
+    box-shadow:
+        0 7px 18px
+        rgba(37, 117, 252, 0.32);
 }
 
 
 .job-menu-button:active {
-	transform: translateY(0);
+    transform: translateY(0);
 
-	box-shadow:
-		0 3px 8px
-		rgba(37, 117, 252, 0.22);
+    box-shadow:
+        0 3px 8px
+        rgba(37, 117, 252, 0.22);
 }
 
 
 .job-menu-button span {
-	width: 100%;
+    width: 100%;
 
-	text-align: center;
+    text-align: center;
 }
 
 
 /* ================= FEED ================= */
 
 .feed {
-	min-width: 0;
+    min-width: 0;
 }
 
 
 .create-post {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 
 .create-post h3 {
-	margin-bottom: 15px;
+    margin-bottom: 15px;
 
-	color: #6a11cb;
+    color: #6a11cb;
 }
 
 
 .post-textarea {
-	width: 100%;
+    width: 100%;
 
-	min-height: 90px;
+    min-height: 90px;
 
-	resize: vertical;
+    resize: vertical;
 
-	border: 1px solid #ddd;
+    border: 1px solid #ddd;
 
-	border-radius: 10px;
+    border-radius: 10px;
 
-	padding: 13px;
+    padding: 13px;
 
-	font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif;
 
-	outline: none;
+    outline: none;
 }
 
 
 .post-textarea:focus {
-	border-color: #6a11cb;
+    border-color: #6a11cb;
 
-	box-shadow:
-		0 0 0 2px
-		rgba(106, 17, 203, 0.08);
+    box-shadow:
+        0 0 0 2px
+        rgba(106, 17, 203, 0.08);
 }
 
 
 .post-options {
-	display: flex;
+    display: flex;
 
-	justify-content: space-between;
+    justify-content: space-between;
 
-	align-items: center;
+    align-items: center;
 
-	margin-top: 12px;
+    margin-top: 12px;
 
-	gap: 10px;
+    gap: 10px;
 }
 
 
 .post-btn {
-	border: none;
+    border: none;
 
-	padding: 10px 20px;
+    padding: 10px 20px;
 
-	border-radius: 20px;
+    border-radius: 20px;
 
-	background:
-		linear-gradient(
-			45deg,
-			#6a11cb,
-			#2575fc
-		);
+    background:
+        linear-gradient(
+            45deg,
+            #6a11cb,
+            #2575fc
+        );
 
-	color: white;
+    color: white;
 
-	font-weight: bold;
+    font-weight: bold;
 
-	cursor: pointer;
+    cursor: pointer;
 
-	transition: 0.3s;
+    transition: 0.3s;
 }
 
 
 .post-btn:hover {
-	transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 
 /* ================= POST ================= */
 
 .post {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 
 .post-header {
-	display: flex;
+    display: flex;
 
-	align-items: center;
+    align-items: center;
 
-	gap: 12px;
+    gap: 12px;
 }
 
 
 .post-avatar {
-	width: 48px;
+    width: 48px;
 
-	height: 48px;
+    height: 48px;
 
-	flex-shrink: 0;
+    flex-shrink: 0;
 
-	border-radius: 50%;
+    border-radius: 50%;
 
-	background:
-		linear-gradient(
-			135deg,
-			#6a11cb,
-			#2575fc
-		);
+    background:
+        linear-gradient(
+            135deg,
+            #6a11cb,
+            #2575fc
+        );
 
-	display: flex;
+    display: flex;
 
-	align-items: center;
+    align-items: center;
 
-	justify-content: center;
+    justify-content: center;
 
-	color: white;
+    color: white;
 
-	font-weight: bold;
+    font-weight: bold;
 }
 
 
 .post-user h4 {
-	margin-bottom: 3px;
+    margin-bottom: 3px;
 }
 
 
 .post-user span {
-	font-size: 12px;
+    font-size: 12px;
 
-	color: #777;
+    color: #777;
 }
 
 
 .post-content {
-	margin-top: 18px;
+    margin-top: 18px;
 
-	line-height: 1.6;
+    line-height: 1.6;
 
-	color: #333;
+    color: #333;
+
+    white-space: normal;
+
+    word-wrap: break-word;
 }
 
 
 /* ================= JOB CARD ================= */
 
 .job-card {
-	margin-top: 15px;
+    margin-top: 15px;
 
-	padding: 18px;
+    padding: 18px;
 
-	border-radius: 10px;
+    border-radius: 10px;
 
-	background: #f5f7ff;
+    background: #f5f7ff;
 
-	border-left:
-		5px solid #2575fc;
+    border-left:
+        5px solid #2575fc;
 }
 
 
 .job-card h3 {
-	color: #2575fc;
+    color: #2575fc;
 
-	margin-bottom: 8px;
+    margin-bottom: 8px;
 }
 
 
 .job-card p {
-	margin: 6px 0;
+    margin: 6px 0;
 
-	font-size: 14px;
-}
+    font-size: 14px;
 
-
-.apply-btn {
-	display: inline-block;
-
-	margin-top: 12px;
-
-	padding: 9px 18px;
-
-	background: #2575fc;
-
-	color: white;
-
-	text-decoration: none;
-
-	border-radius: 7px;
-
-	font-weight: bold;
-}
-
-
-.apply-btn:hover {
-	background: #6a11cb;
+    line-height: 1.6;
 }
 
 
 /* ================= POST ACTIONS ================= */
 
 .post-actions {
-	display: flex;
+    display: flex;
 
-	gap: 10px;
+    gap: 10px;
 
-	margin-top: 18px;
+    margin-top: 18px;
 
-	padding-top: 12px;
+    padding-top: 12px;
 
-	border-top: 1px solid #eee;
+    border-top: 1px solid #eee;
 }
 
 
 .post-actions button {
-	border: none;
+    border: none;
 
-	background: transparent;
+    background: transparent;
 
-	padding: 8px 15px;
+    padding: 8px 15px;
 
-	border-radius: 7px;
+    border-radius: 7px;
 
-	cursor: pointer;
+    cursor: pointer;
 
-	color: #555;
+    color: #555;
 
-	font-weight: bold;
+    font-weight: bold;
 
-	transition: 0.3s;
+    transition: 0.3s;
 }
 
 
 .post-actions button:hover {
-	background: #f0f3ff;
+    background: #f0f3ff;
 
-	color: #2575fc;
+    color: #2575fc;
 }
 
 
 /* ================= RIGHT SIDEBAR ================= */
 
 .right-sidebar {
-	position: sticky;
+    position: sticky;
 
-	top: 90px;
+    top: 90px;
 }
 
 
 .right-card {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 
 .right-card h3 {
-	color: #6a11cb;
+    color: #6a11cb;
 
-	margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 
 .recommendation {
-	display: flex;
+    display: flex;
 
-	align-items: center;
+    align-items: center;
 
-	gap: 10px;
+    gap: 10px;
 
-	padding: 10px 0;
+    padding: 10px 0;
 
-	border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 
 
 .recommendation:last-child {
-	border-bottom: none;
+    border-bottom: none;
 }
 
 
 .recommend-avatar {
-	width: 42px;
+    width: 42px;
 
-	height: 42px;
+    height: 42px;
 
-	flex-shrink: 0;
+    flex-shrink: 0;
 
-	border-radius: 50%;
+    border-radius: 50%;
 
-	background:
-		linear-gradient(
-			135deg,
-			#6a11cb,
-			#2575fc
-		);
+    background:
+        linear-gradient(
+            135deg,
+            #6a11cb,
+            #2575fc
+        );
 
-	color: white;
+    color: white;
 
-	display: flex;
+    display: flex;
 
-	align-items: center;
+    align-items: center;
 
-	justify-content: center;
+    justify-content: center;
 
-	font-weight: bold;
+    font-weight: bold;
 }
 
 
 .recommend-info {
-	flex: 1;
+    flex: 1;
 }
 
 
 .recommend-info strong {
-	display: block;
+    display: block;
 
-	font-size: 14px;
+    font-size: 14px;
 }
 
 
 .recommend-info span {
-	font-size: 12px;
+    font-size: 12px;
 
-	color: #777;
+    color: #777;
 }
 
 
 .connect-btn {
-	border: 1px solid #2575fc;
+    border: 1px solid #2575fc;
 
-	background: white;
+    background: white;
 
-	color: #2575fc;
+    color: #2575fc;
 
-	padding: 5px 9px;
+    padding: 5px 9px;
 
-	border-radius: 6px;
+    border-radius: 6px;
 
-	cursor: pointer;
+    cursor: pointer;
 
-	font-size: 12px;
+    font-size: 12px;
 }
 
 
 .connect-btn:hover {
-	background: #2575fc;
+    background: #2575fc;
 
-	color: white;
+    color: white;
+}
+
+
+/* ================= LATEST JOB ================= */
+
+.latest-job {
+    padding: 10px 0;
+
+    border-bottom: 1px solid #eee;
+}
+
+
+.latest-job:last-child {
+    border-bottom: none;
+}
+
+
+.latest-job strong {
+    display: block;
+
+    font-size: 14px;
+}
+
+
+.latest-job p {
+    font-size: 12px;
+
+    color: #777;
+
+    margin-top: 5px;
+}
+
+
+/* ================= EMPTY POSTS ================= */
+
+.no-posts {
+    text-align: center;
+
+    color: #777;
+
+    padding: 25px 10px;
 }
 
 
 /* ================= FOOTER ================= */
 
 footer {
-	width: 100%;
+    width: 100%;
 
-	background:
-		rgba(0, 0, 0, 0.20);
+    background:
+        rgba(0, 0, 0, 0.20);
 
-	backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
 
-	-webkit-backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 
-	border-top:
-		1px solid
-		rgba(255, 255, 255, 0.15);
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.15);
 
-	color: white;
+    color: white;
 
-	text-align: center;
+    text-align: center;
 
-	padding: 15px;
+    padding: 15px;
 
-	font-size: 14px;
+    font-size: 14px;
 }
 
 
@@ -736,97 +769,97 @@ footer {
 
 @media (max-width: 1000px) {
 
-	.page-container {
-		grid-template-columns:
-			200px
-			minmax(0, 1fr);
-	}
+    .page-container {
+        grid-template-columns:
+            200px
+            minmax(0, 1fr);
+    }
 
-	.right-sidebar {
-		display: none;
-	}
+    .right-sidebar {
+        display: none;
+    }
 
 }
 
 
 @media (max-width: 700px) {
 
-	header {
-		padding: 12px 18px;
+    header {
+        padding: 12px 18px;
 
-		flex-direction: column;
+        flex-direction: column;
 
-		gap: 10px;
-	}
-
-
-	header h1 {
-		font-size: 20px;
-	}
+        gap: 10px;
+    }
 
 
-	nav {
-		flex-wrap: wrap;
-
-		justify-content: center;
-	}
+    header h1 {
+        font-size: 20px;
+    }
 
 
-	main {
-		padding: 20px 10px;
-	}
+    nav {
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
 
 
-	.page-container {
-		grid-template-columns: 1fr;
-	}
+    main {
+        padding: 20px 10px;
+    }
 
 
-	.left-sidebar {
-		position: static;
-	}
+    .page-container {
+        grid-template-columns: 1fr;
+    }
 
 
-	.side-menu {
-		display: grid;
-
-		grid-template-columns:
-			1fr 1fr;
-
-		gap: 6px;
-	}
+    .left-sidebar {
+        position: static;
+    }
 
 
-	.menu-divider {
-		display: none;
-	}
+    .side-menu {
+        display: grid;
+
+        grid-template-columns:
+            1fr 1fr;
+
+        gap: 6px;
+    }
 
 
-	.side-menu-item {
-		justify-content: center;
-	}
+    .menu-divider {
+        display: none;
+    }
 
 
-	.job-menu-button {
-		justify-content: center;
-	}
+    .side-menu-item {
+        justify-content: center;
+    }
 
 
-	.job-menu-button span {
-		text-align: center;
-	}
+    .job-menu-button {
+        justify-content: center;
+    }
 
 
-	.post-options {
-		flex-direction: column;
-
-		align-items: stretch;
-	}
+    .job-menu-button span {
+        text-align: center;
+    }
 
 
-	.post-btn {
-		width: 100%;
-	}
+    .post-options {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .post-btn {
+        width: 100%;
+    }
 
 }
 
@@ -842,26 +875,26 @@ footer {
 
 <header>
 
-	<h1>
+    <h1>
 
-		<a href="loginToHomeServlet">
-			Alumni Portal
-		</a>
+        <a href="loginToHomeServlet">
+            Alumni Portal
+        </a>
 
-	</h1>
+    </h1>
 
 
-	<nav>
+    <nav>
 
-		<p>
+        <p>
 
-			<strong>
-				Hello!! <%=request.getAttribute("name")%>
-			</strong>
+            <strong>
+                Hello!! <%= userName %>
+            </strong>
 
-		</p>
+        </p>
 
-	</nav>
+    </nav>
 
 </header>
 
@@ -874,445 +907,553 @@ footer {
 <div class="page-container">
 
 
-	<!-- ================= LEFT SIDEBAR ================= -->
+    <!-- ================= LEFT SIDEBAR ================= -->
 
-	<aside class="left-sidebar">
+    <aside class="left-sidebar">
 
-		<div class="glass-card">
+        <div class="glass-card">
 
-			<div class="side-menu">
+            <div class="side-menu">
 
 
-				<!-- HOME -->
+                <!-- HOME -->
 
-				<a href="homepage.jsp"
-				   class="side-menu-item active">
+                <a href="loginToHomeServlet"
+                   class="side-menu-item active">
 
-					<span>
-						Home
-					</span>
+                    <span>
+                        Home
+                    </span>
 
-				</a>
+                </a>
 
 
-				<!-- ALUMNI -->
+                <!-- ALUMNI -->
 
-				<a href="alumniSearchPage.jsp"
-				   class="side-menu-item">
+                <a href="alumniSearchPage.jsp"
+                   class="side-menu-item">
 
-					<span>
-						Alumni
-					</span>
+                    <span>
+                        Alumni
+                    </span>
 
-				</a>
+                </a>
 
 
-				<!-- RECOMMENDED SKILLMATES -->
+                <!-- RECOMMENDED SKILLMATES -->
 
-				<a href="#"
-				   class="side-menu-item"
-				   onclick="
-					   document
-					   .getElementById('recommendForm')
-					   .submit();
-					   return false;
-				   ">
+                <a href="#"
+                   class="side-menu-item"
+                   onclick="
+                       document
+                       .getElementById('recommendForm')
+                       .submit();
+                       return false;
+                   ">
 
-					<span>
-						Recommended SkillMates
-					</span>
+                    <span>
+                        Recommended SkillMates
+                    </span>
 
-				</a>
+                </a>
 
 
-				<form id="recommendForm"
-					  action="recommendedAlumniServlet"
-					  method="post"
-					  style="display:none;">
+                <form id="recommendForm"
+                      action="recommendedAlumniServlet"
+                      method="post"
+                      style="display:none;">
 
-					<input type="hidden"
-						   name="batch"
-						   value="<%=request.getAttribute("batchNo")%>">
+                    <input type="hidden"
+                           name="batch"
+                           value="<%= batchNo %>">
 
-				</form>
+                </form>
 
 
-				<!-- MESSAGES -->
+                <!-- MESSAGES -->
 
-				<a href="messageSenderListServlet"
-				   class="side-menu-item">
+                <a href="messageSenderListServlet"
+                   class="side-menu-item">
 
-					<span>
-						Messages
-					</span>
+                    <span>
+                        Messages
+                    </span>
 
-				</a>
+                </a>
 
 
-				<!-- MY PROFILE -->
+                <!-- MY PROFILE -->
 
-				<%
+                <a href="<%= "alumni".equalsIgnoreCase(role)
+                        ? "alumniProfile"
+                        : "studentProfile" %>"
+                   class="side-menu-item">
 
-					String role =
-						(String) session.getAttribute("role");
+                    <span>
+                        My Profile
+                    </span>
 
-				%>
+                </a>
 
 
-				<a href="<%= "alumni".equalsIgnoreCase(role)
-						? "alumniProfile"
-						: "studentProfile" %>"
-				   class="side-menu-item">
+                <!-- LOGOUT -->
 
-					<span>
-						My Profile
-					</span>
+                <a href="loginPage.html"
+                   class="side-menu-item logout">
 
-				</a>
-				
-				
-				<!-- LOGOUT -->
+                    <span>
+                        Logout
+                    </span>
 
-				<a href="loginPage.html"
-				   class="side-menu-item logout">
+                </a>
 
-					<span>
-						Logout
-					</span>
 
-				</a>
+                <!-- DIVIDER -->
 
+                <div class="menu-divider"></div>
 
 
+                <!-- POST A JOB -->
 
-				<!-- DIVIDER -->
+                <%
+                    if ("alumni".equalsIgnoreCase(role)) {
+                %>
 
-				<div class="menu-divider"></div>
-				
-				<!-- POST A JOB -->
+                <form action="postJobPage.jsp"
+                      method="post"
+                      class="job-menu-form">
 
-				<%
+                    <input type="hidden"
+                           name="formType"
+                           value="job">
 
-					if ("alumni".equalsIgnoreCase(role)) {
+                    <button type="submit"
+                            class="job-menu-button">
 
-				%>
+                        <span>
+                            Post a Job
+                        </span>
 
+                    </button>
 
-				<form action="postManagerServlet"
-					  method="post"
-					  class="job-menu-form">
+                </form>
 
-					<input type="hidden"
-						   name="formType"
-						   value="job">
+                <%
+                    }
+                %>
 
 
-					<button type="submit"
-							class="job-menu-button">
+            </div>
 
-						<span>
-							Post a Job
-						</span>
+        </div>
 
-					</button>
+    </aside>
 
-				</form>
 
 
-				<%
+    <!-- ================= CENTER FEED ================= -->
 
-					}
+    <section class="feed">
 
-				%>
 
+        <!-- CREATE POST -->
 
-			</div>
+        <div class="glass-card create-post">
 
-		</div>
+            <h3>
+                What's on your mind?
+            </h3>
 
-	</aside>
 
+            <form action="postManagerServlet"
+                  method="post">
 
+                <textarea
+                    class="post-textarea"
+                    name="mindContent"
+                    placeholder="What's on your mind? Share an update with the alumni community..."
+                    required></textarea>
 
-	<!-- ================= CENTER FEED ================= -->
 
-	<section class="feed">
+                <input type="hidden"
+                       name="formType"
+                       value="mind">
 
 
-		<!-- CREATE POST -->
+                <div class="post-options">
 
-		<div class="glass-card create-post">
+                    <button
+                        type="submit"
+                        class="post-btn">
 
-			<h3>
-				What's on your mind?
-			</h3>
+                        Post
 
+                    </button>
 
-			<form action="postManagerServlet"
-				  method="post">
+                </div>
 
+            </form>
 
-				<textarea
-					class="post-textarea"
-					name="mindContent"
-					placeholder="What's on your mind? Share an update with the alumni community..."
-					required></textarea>
+        </div>
 
 
-				<input type="hidden"
-					   name="formType"
-					   value="mind">
 
+        <!-- ================= DYNAMIC POSTS ================= -->
 
-				<div class="post-options">
+        <%
+            if (posts != null && !posts.isEmpty()) {
 
-					<button
-						type="submit"
-						class="post-btn">
+                for (Map<String, Object> post : posts) {
 
-						Post
+                    String postName =
+                            (String) post.get("name");
 
-					</button>
+                    String postBatch =
+                            (String) post.get("batchNo");
 
-				</div>
+                    String content =
+                            (String) post.get("content");
 
-			</form>
+                    String type =
+                            (String) post.get("type");
 
-		</div>
+                    Timestamp createdAt =
+                            (Timestamp) post.get("createdAt");
 
+                    String firstLetter = "?";
 
+                    if (postName != null &&
+                        !postName.trim().isEmpty()) {
 
-		<!-- ================= POST 1 ================= -->
+                        firstLetter =
+                                postName.trim()
+                                .substring(0, 1)
+                                .toUpperCase();
+                    }
+        %>
 
-		<div class="glass-card post">
 
-			<div class="post-header">
+        <!-- ================= SINGLE POST ================= -->
 
-				<div class="post-avatar">
-					R
-				</div>
+        <div class="glass-card post">
 
+            <div class="post-header">
 
-				<div class="post-user">
+                <div class="post-avatar">
+                    <%= firstLetter %>
+                </div>
 
-					<h4>
-						Rahim Ahmed
-					</h4>
 
+                <div class="post-user">
 
-					<span>
-						JUST CSE Batch 2019
-						2 hours ago
-					</span>
+                    <h4>
+                        <%= postName %>
+                    </h4>
 
-				</div>
 
-			</div>
+                    <span>
+                        JUST CSE Batch <%= postBatch %>
 
+                        <% if (createdAt != null) { %>
 
-			<div class="post-content">
+                            &nbsp; | &nbsp;
 
-				<p>
+                            <%= createdAt %>
 
-					Happy to share that I have joined
-					ABC Technologies as a Software Engineer.
-					Thanks to everyone from our alumni
-					community for their support!
+                        <% } %>
 
-				</p>
+                    </span>
 
-			</div>
+                </div>
 
+            </div>
 
-			<div class="post-actions">
 
-				<button>
-					Like
-				</button>
+            <div class="post-content">
 
-				<button>
-					Comment
-				</button>
 
-				<button>
-					Share
-				</button>
+                <% if ("job".equalsIgnoreCase(type)) { %>
 
-			</div>
 
-		</div>
+                    <!-- ================= JOB POST ================= -->
 
+                    <div class="job-card">
 
-	</section>
+                        <h3>
+                            Job Opportunity
+                        </h3>
 
 
+                        <p>
+                            <%= content != null
+                                ? content.replace("\n", "<br>")
+                                : "" %>
+                        </p>
 
-	<!-- ================= RIGHT SIDEBAR ================= -->
+                    </div>
 
-	<aside class="right-sidebar">
 
+                <% } else { %>
 
-		<!-- RECOMMENDED SKILLMATES -->
 
-		<div class="glass-card right-card">
+                    <!-- ================= NORMAL POST ================= -->
 
-			<h3>
-				Recommended SkillMates
-			</h3>
+                    <p>
 
+                        <%= content != null
+                            ? content.replace("\n", "<br>")
+                            : "" %>
 
-			<div class="recommendation">
+                    </p>
 
-				<div class="recommend-avatar">
-					A
-				</div>
 
+                <% } %>
 
-				<div class="recommend-info">
 
-					<strong>
-						Arif Hasan
-					</strong>
+            </div>
 
-					<span>
-						Java, Spring Boot
-					</span>
 
-				</div>
+            <!-- POST ACTIONS -->
 
+            <div class="post-actions">
 
-				<button class="connect-btn">
-					Connect
-				</button>
+                <button>
+                    Like
+                </button>
 
-			</div>
+                <button>
+                    Comment
+                </button>
 
+                <button>
+                    Share
+                </button>
 
-			<div class="recommendation">
+            </div>
 
-				<div class="recommend-avatar">
-					N
-				</div>
+        </div>
 
 
-				<div class="recommend-info">
+        <%
+                }
 
-					<strong>
-						Nusrat Jahan
-					</strong>
+            } else {
+        %>
 
-					<span>
-						Python, ML
-					</span>
 
-				</div>
+        <!-- ================= NO POSTS ================= -->
 
+        <div class="glass-card post">
 
-				<button class="connect-btn">
-					Connect
-				</button>
+            <div class="no-posts">
 
-			</div>
+                No posts available in the last 7 days.
 
+            </div>
 
-			<div class="recommendation">
+        </div>
 
-				<div class="recommend-avatar">
-					T
-				</div>
 
+        <%
+            }
+        %>
 
-				<div class="recommend-info">
 
-					<strong>
-						Tanvir Ahmed
-					</strong>
+    </section>
 
-					<span>
-						C++, CP
-					</span>
 
-				</div>
 
+    <!-- ================= RIGHT SIDEBAR ================= -->
 
-				<button class="connect-btn">
-					Connect
-				</button>
+    <aside class="right-sidebar">
 
-			</div>
 
+        <!-- RECOMMENDED SKILLMATES -->
 
-			<div style="margin-top:15px;">
+        <div class="glass-card right-card">
 
-				<a href="recommendedAlumniServlet"
-				   style="
-				   color:#2575fc;
-				   text-decoration:none;
-				   font-weight:bold;
-				   font-size:14px;">
+            <h3>
+                Recommended SkillMates
+            </h3>
 
-					View all SkillMates
 
-				</a>
+            <div class="recommendation">
 
-			</div>
+                <div class="recommend-avatar">
+                    A
+                </div>
 
-		</div>
 
+                <div class="recommend-info">
 
+                    <strong>
+                        Arif Hasan
+                    </strong>
 
-		<!-- LATEST JOBS -->
+                    <span>
+                        Java, Spring Boot
+                    </span>
 
-		<div class="glass-card right-card">
+                </div>
 
-			<h3>
-				Latest Jobs
-			</h3>
 
+                <button class="connect-btn">
+                    Connect
+                </button>
 
-			<div style="
-				padding:10px 0;
-				border-bottom:1px solid #eee;">
+            </div>
 
-				<strong>
-					Software Engineer
-				</strong>
 
+            <div class="recommendation">
 
-				<p style="
-					font-size:12px;
-					color:#777;
-					margin-top:5px;">
+                <div class="recommend-avatar">
+                    N
+                </div>
 
-					ABC Technologies
 
-				</p>
+                <div class="recommend-info">
 
-			</div>
+                    <strong>
+                        Nusrat Jahan
+                    </strong>
 
+                    <span>
+                        Python, ML
+                    </span>
 
-			<div style="
-				padding:10px 0;">
+                </div>
 
-				<strong>
-					Junior Java Developer
-				</strong>
 
+                <button class="connect-btn">
+                    Connect
+                </button>
 
-				<p style="
-					font-size:12px;
-					color:#777;
-					margin-top:5px;">
+            </div>
 
-					XYZ Ltd.
 
-				</p>
+            <div class="recommendation">
 
-			</div>
+                <div class="recommend-avatar">
+                    T
+                </div>
 
-		</div>
 
-	</aside>
+                <div class="recommend-info">
+
+                    <strong>
+                        Tanvir Ahmed
+                    </strong>
+
+                    <span>
+                        C++, CP
+                    </span>
+
+                </div>
+
+
+                <button class="connect-btn">
+                    Connect
+                </button>
+
+            </div>
+
+
+            <div style="margin-top:15px;">
+
+                <a href="recommendedAlumniServlet"
+                   style="
+                   color:#2575fc;
+                   text-decoration:none;
+                   font-weight:bold;
+                   font-size:14px;">
+
+                    View all SkillMates
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= LATEST JOBS ================= -->
+
+        <div class="glass-card right-card">
+
+            <h3>
+                Latest Jobs
+            </h3>
+
+
+            <%
+                boolean hasJob = false;
+
+                if (posts != null) {
+
+                    for (Map<String, Object> post : posts) {
+
+                        String type =
+                                (String) post.get("type");
+
+                        if ("job".equalsIgnoreCase(type)) {
+
+                            hasJob = true;
+
+                            String content =
+                                    (String) post.get("content");
+
+                            String jobName =
+                                    (String) post.get("name");
+
+            %>
+
+
+            <div class="latest-job">
+
+                <strong>
+                    Job Opportunity
+                </strong>
+
+                <p>
+                    Posted by <%= jobName %>
+                </p>
+
+                <p>
+                    <%= content != null
+                        ? content.split("\n")[0]
+                        : "" %>
+                </p>
+
+            </div>
+
+
+            <%
+                        }
+                    }
+                }
+
+                if (!hasJob) {
+            %>
+
+
+            <div class="latest-job">
+
+                <p>
+                    No job posts in the last 7 days.
+                </p>
+
+            </div>
+
+
+            <%
+                }
+            %>
+
+
+        </div>
+
+    </aside>
 
 
 </div>
@@ -1325,11 +1466,11 @@ footer {
 
 <footer>
 
-	&copy; 2026 All Rights Reserved by
+    &copy; 2026 All Rights Reserved by
 
-	<strong>
-		tirtho_saha
-	</strong>
+    <strong>
+        tirtho_saha
+    </strong>
 
 </footer>
 

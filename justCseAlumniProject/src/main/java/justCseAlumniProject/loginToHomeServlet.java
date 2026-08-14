@@ -17,102 +17,211 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(description = "fetch the data from to serve to the student page", urlPatterns = { "/loginToHomeServlet" })
+@WebServlet("/loginToHomeServlet")
 public class loginToHomeServlet extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("email") == null) {
-			response.sendRedirect("loginPage.html");
-			return;
-		}
 
-		String email = (String) session.getAttribute("email");
-		String name = (String) session.getAttribute("name");
-		String role = (String) session.getAttribute("role");
-		String batchNo = (String) session.getAttribute("batchNo");
-		
-		request.setAttribute("email", email);
-		request.setAttribute("name", name);
-		request.setAttribute("role", role);
-		request.setAttribute("batchNo", batchNo);
-	
+    private static final long serialVersionUID = 1L;
 
-//		try {
-//			Class.forName("com.mysql.cj.jdbc.Driver");
-//			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/alumniDirectory", "root",
-//					"225500");
-//
-//			String sql = "SELECT * FROM student WHERE student_email = ?";
-//			PreparedStatement ps = conn.prepareStatement(sql);
-//			ps.setString(1, email);
-//
-//			ResultSet rs = ps.executeQuery();
-//			if (rs.next()) {
-//				request.setAttribute("name", rs.getString("name"));
-//				request.setAttribute("email", rs.getString("student_email"));
-//				request.setAttribute("batch", rs.getString("batch_no"));
-//				request.setAttribute("reg", rs.getString("reg_no"));
-//				request.setAttribute("roll", rs.getString("roll_no"));
-//
-//				request.setAttribute("session", rs.getString("session"));
-//
-//				request.setAttribute("mobile", rs.getString("mobile_no"));
-//				request.setAttribute("role", "Student");
-//
-//			}
-//
-//			int userId = rs.getInt("user_id");
-//
-//			String sql4 = "SELECT * FROM projects WHERE user_id = ?"; // পরে প্রজেক্ট তালিকা দেখানোর জন্য নতুন করে যুক্ত
-//																		// করছি
-//			PreparedStatement ps4 = conn.prepareStatement(sql4);
-//			ps4.setInt(1, userId);
-//			ResultSet rs4 = ps4.executeQuery();
-//
-//			List<Map<String, String>> projects = new ArrayList<>();
-//
-//			while (rs4.next()) {
-//				Map<String, String> project = new HashMap<>();
-//				project.put("title", rs4.getString("title"));
-//				project.put("description", rs4.getString("description"));
-//				project.put("technologies", rs4.getString("technologies"));
-//				project.put("projectLink", rs4.getString("project_link"));
-//				project.put("githubLink", rs4.getString("github_link"));
-//				projects.add(project);
-//				System.out.println(rs4.getString("title"));
-//			}
-//
-//			if (projects.isEmpty()) {
-//				request.setAttribute("projectMessage", "No projects found for this user.");
-//			} else {
-//				request.setAttribute("projects", projects);
-//			}
-//
-//			String sql5 = "SELECT skill_name FROM skill WHERE skill_id IN "
-//					+ "(SELECT skill_id FROM student_skill WHERE user_id = ?)";
-//
-//			PreparedStatement ps5 = conn.prepareStatement(sql5);
-//			ps5.setInt(1, userId);
-//
-//			ResultSet rs5 = ps5.executeQuery();
-//			List<String> skills = new ArrayList<>();
-//
-//			while (rs5.next()) {
-//				skills.add(rs5.getString("skill_name"));
-//			}
-//
-//			request.setAttribute("skills", skills);
-//
-//			rs.close();
-//			ps.close();
-//			conn.close();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		
-		System.out.println("Email: " + email);
+    private static final String DB_URL =
+            "jdbc:mysql://localhost:3306/alumniDirectory";
 
-		request.getRequestDispatcher("homePage.jsp").forward(request, response);
-	}
+    private static final String DB_USER = "root";
+
+    private static final String DB_PASSWORD = "225500";
+
+    @Override
+    protected void doGet(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
+
+        HttpSession session = request.getSession(false);
+
+        // ==========================================
+        // SESSION CHECK
+        // ==========================================
+
+        if (session == null ||
+                session.getAttribute("userId") == null) {
+
+            response.sendRedirect("loginPage.html");
+            return;
+        }
+
+        // ==========================================
+        // GET SESSION DATA
+        // ==========================================
+
+        String name =
+                (String) session.getAttribute("name");
+
+        String role =
+                (String) session.getAttribute("role");
+
+        String batchNo =
+                (String) session.getAttribute("batchNo");
+
+        // ==========================================
+        // POST LIST
+        // ==========================================
+
+        List<Map<String, Object>> posts =
+                new ArrayList<>();
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+
+            // ==========================================
+            // LOAD MYSQL DRIVER
+            // ==========================================
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // ==========================================
+            // DATABASE CONNECTION
+            // ==========================================
+
+            conn = DriverManager.getConnection(
+                    DB_URL,
+                    DB_USER,
+                    DB_PASSWORD
+            );
+
+            // ==========================================
+            // FETCH LAST 7 DAYS POSTS
+            // ==========================================
+
+            String sql =
+                    "SELECT user_id, name, batchNo, content, type, created_at "
+                  + "FROM posts "
+                  + "WHERE created_at >= NOW() - INTERVAL 7 DAY "
+                  + "ORDER BY created_at DESC";
+
+            ps = conn.prepareStatement(sql);
+
+            rs = ps.executeQuery();
+
+            // ==========================================
+            // STORE POST DATA
+            // ==========================================
+
+            while (rs.next()) {
+
+                Map<String, Object> post =
+                        new HashMap<>();
+
+                post.put(
+                        "userId",
+                        rs.getInt("user_id")
+                );
+
+                post.put(
+                        "name",
+                        rs.getString("name")
+                );
+
+                post.put(
+                        "batchNo",
+                        rs.getString("batchNo")
+                );
+
+                post.put(
+                        "content",
+                        rs.getString("content")
+                );
+
+                post.put(
+                        "type",
+                        rs.getString("type")
+                );
+
+                post.put(
+                        "createdAt",
+                        rs.getTimestamp("created_at")
+                );
+
+                posts.add(post);
+            }
+
+            // ==========================================
+            // SEND DATA TO JSP
+            // ==========================================
+
+            request.setAttribute(
+                    "name",
+                    name
+            );
+
+            request.setAttribute(
+                    "role",
+                    role
+            );
+
+            request.setAttribute(
+                    "batchNo",
+                    batchNo
+            );
+
+            request.setAttribute(
+                    "posts",
+                    posts
+            );
+
+            // ==========================================
+            // FORWARD TO HOMEPAGE
+            // ==========================================
+
+            request.getRequestDispatcher(
+                    "homePage.jsp"
+            ).forward(request, response);
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            response.getWriter().println(
+                    "Error: " + e.getMessage()
+            );
+
+        } finally {
+
+            // ==========================================
+            // CLOSE DATABASE RESOURCES
+            // ==========================================
+
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
+
+        doGet(request, response);
+    }
 }

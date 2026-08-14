@@ -13,7 +13,10 @@ public class addSkillServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		
+		
 		String skillName = request.getParameter("skill");
+		
 
 		HttpSession session = request.getSession(false);
 
@@ -24,6 +27,8 @@ public class addSkillServlet extends HttpServlet {
 
 		String role = (String) session.getAttribute("role");
 		Integer userId = (Integer) session.getAttribute("userId");
+		
+		session.setAttribute("skillName", skillName);
 
 		if (userId == null || role == null) {
 			response.sendRedirect("login.jsp");
@@ -76,10 +81,10 @@ public class addSkillServlet extends HttpServlet {
 				response.sendRedirect("studentProfile");
 
 			}
+			
 
 			conn.close();
 
-			System.out.println("Skill added successfully for user_id: " + userId + ", skill_id: " + skillId);
 
 		} catch (Exception e) {
 			e.printStackTrace();

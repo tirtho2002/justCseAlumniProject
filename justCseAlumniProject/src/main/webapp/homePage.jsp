@@ -1272,6 +1272,7 @@ footer {
 
         <div class="glass-card right-card">
 
+<%--
             <h3>
                 Recommended SkillMates
             </h3>
@@ -1373,8 +1374,7 @@ footer {
 
             </div>
 
-        </div>
-
+        </div> --%>
 
 
         <!-- ================= LATEST JOBS ================= -->
